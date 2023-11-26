@@ -29,12 +29,14 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/",
+            "Domain\\": "domain/",
+            "Helper\\": "helper/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
         },
         "files": [
-            "./Helpers/ApiResponse.php",
-            "./Helpers/HelperMethod.php"
+            "./helper/ApiResponse.php",
+            "./helper/HelperMethod.php"
         ]
     },
     "autoload-dev": {

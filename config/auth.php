@@ -81,8 +81,8 @@ return [
         ],
 
         'admins' => [
-            'driver' => 'database',
-            'table' => Admin::class,
+            'driver' => 'eloquent',
+            'model' => Admin::class,
         ],
     ],
 
