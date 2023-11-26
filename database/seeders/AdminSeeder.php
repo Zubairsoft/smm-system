@@ -6,6 +6,7 @@ use App\Models\Admin;
 use Domain\Supports\Enums\RoleEnum;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Auth;
 
 class AdminSeeder extends Seeder
 {
@@ -14,6 +15,8 @@ class AdminSeeder extends Seeder
      */
     public function run(): void
     {
+        Auth::shouldUse(config('auth.admin-web-guard'));
+        
         $admin = Admin::query()->create([
             'first_name' => 'admin',
             'last_name' => 'admin',
