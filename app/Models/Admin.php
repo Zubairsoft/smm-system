@@ -4,12 +4,13 @@ namespace App\Models;
 
 use Domain\Dashboard\Attributes\AdminAttributes;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Contracts\Role;
 use Spatie\Permission\Traits\HasRoles;
 
 class Admin extends BaseModel
 {
-    use AdminAttributes, SoftDeletes ,HasRoles;
+    use AdminAttributes, HasApiTokens, SoftDeletes, HasRoles;
 
     protected $fillable = [
         'first_name',
