@@ -16,7 +16,7 @@ class AdminSeeder extends Seeder
     public function run(): void
     {
         Auth::shouldUse(config('auth.admin-web-guard'));
-        
+
         $admin = Admin::query()->create([
             'first_name' => 'admin',
             'last_name' => 'admin',
