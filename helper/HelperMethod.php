@@ -2,5 +2,5 @@
 
 function defaultPassword()
 {
-    return 0000;
+    return "0000";
 }
