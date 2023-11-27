@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\v1\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Dashboard\Sessions\LoginResource;
 use Domain\Dashboard\Actions\Sessions\LoginAction;
 use Domain\Dashboard\Actions\Sessions\LogoutAction;
 use Domain\Dashboard\DataTransferToObject\Sessions\LoginData;
@@ -15,14 +16,14 @@ class SessionController extends Controller
     {
         $admin = app(LoginAction::class)($request);
 
-        return sendSuccessResponse(data: $admin);
+        return sendSuccessResponse(__('auth.success_login'), LoginResource::make($admin));
     }
 
 
     public function logout(): JsonResponse
     {
-        app(LogoutAction::class);
+        app(LogoutAction::class)();
 
-        return sendSuccessResponse();
+        return sendSuccessResponse(__('auth.logout'));
     }
 }
