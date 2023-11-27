@@ -7,5 +7,5 @@ Route::name('session.')
     ->prefix('sessions')
     ->controller(SessionController::class)->group(function () {
         Route::post('login', 'login');
-        Route::post('logout', 'logout');
+        Route::post('logout', 'logout')->middleware('auth:admin-api');
     });

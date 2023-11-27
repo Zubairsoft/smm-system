@@ -8,6 +8,6 @@ final class LogoutAction
 {
     public function __invoke(): void
     {
-        Auth::guard(config('auth.admin-web-guard'))->user()->currentAccessToken()->delete();
+        Auth::user()->currentAccessToken()->delete();
     }
 }
