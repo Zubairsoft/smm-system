@@ -5,6 +5,7 @@ namespace Domain\Dashboard\Actions\Sessions;
 use App\Exceptions\LogicException;
 use App\Models\Admin;
 use Domain\Dashboard\DataTransferToObject\Sessions\LoginData;
+use Illuminate\Support\Facades\Hash;
 
 final class LoginAction
 {
