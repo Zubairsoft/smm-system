@@ -31,6 +31,7 @@
             "App\\": "app/",
             "Domain\\": "domain/",
             "Helper\\": "helper/",
+            "Repository\\": "repository/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
         },
