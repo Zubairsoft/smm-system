@@ -30,10 +30,11 @@ abstract class BaseRepository
     {
         $model = app($this->model)->query()->create($data->toArray());
 
-        if (isFile($data->{$file})) {
-            $model->addMedia($data->{$file})->toMediaCollection('avatar');
-        }
-
+        if ($file) {
+            if (isFile($data->{$file})) {
+                $model->addMedia($data->{$file})->toMediaCollection('avatar');
+            }
+          }
         return $model;
     }
 
@@ -48,9 +49,11 @@ abstract class BaseRepository
 
         $model->update($data->toArray());
 
+      if ($file) {
         if (isFile($data->{$file})) {
             $model->addMedia($data->{$file})->toMediaCollection('avatar');
         }
+      }
 
         return $model->refresh();
     }

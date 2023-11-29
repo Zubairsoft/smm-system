@@ -17,6 +17,8 @@ class ShopRepository extends BaseRepository
     {
         $shop = parent::store($data, $file);
 
-        return $shop->bankAccounts()->createMany($data->bank_accounts);
+        $shop->bankAccounts()->createMany($data->bank_accounts->toArray());
+
+        return $shop;
     }
 }
