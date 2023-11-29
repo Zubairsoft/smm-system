@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\v1\Dashboard\BankAccountController;
+use App\Http\Controllers\Api\v1\Dashboard\BankController;
 use App\Http\Controllers\Api\v1\Dashboard\SessionController;
 use App\Http\Controllers\Api\v1\Dashboard\ShopController;
 use Illuminate\Support\Facades\Route;
@@ -23,11 +24,21 @@ Route::middleware('auth:admin-api')
                 Route::get('/{id}', 'show');
                 Route::patch('/{id}', 'update');
                 Route::delete('/{id}', 'destroy');
+
+                // Route::name('bank-accounts.')
+                //     ->prefix('{id}/bank-accounts')
+                //     ->controller(BankAccountController::class)->group(function () {
+                //         Route::get('/', 'index');
+                //         Route::post('/', 'store');
+                //         Route::get('/{id}', 'show');
+                //         Route::patch('/{id}', 'update');
+                //         Route::delete('/{id}', 'destroy');
+                //     });
             });
 
-        Route::name('bank-accounts.')
-            ->prefix('{id}/bank-accounts')
-            ->controller(BankAccountController::class)->group(function () {
+        Route::name('banks')
+            ->prefix('banks')
+            ->controller(BankController::class)->group(function () {
                 Route::get('/', 'index');
                 Route::post('/', 'store');
                 Route::get('/{id}', 'show');
