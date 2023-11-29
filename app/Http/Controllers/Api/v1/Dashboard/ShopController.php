@@ -7,7 +7,6 @@ use App\Http\Resources\Dashboard\Shops\ShopResource;
 use Domain\Dashboard\DataTransferToObject\Shops\StoreShopData;
 use Domain\Dashboard\DataTransferToObject\Shops\UpdateShopData;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Repository\ShopRepository;
 
 class ShopController extends Controller
@@ -18,8 +17,12 @@ class ShopController extends Controller
     {
         $this->repository = new ShopRepository();
     }
-    public function index()
+
+    public function index(): JsonResponse
     {
+        $shops = $this->repository->index();
+
+        return sendSuccessResponse(message: __('messages.get_data'), data: ShopResource::collection($shops));
     }
 
     public function store(StoreShopData $request): JsonResponse
