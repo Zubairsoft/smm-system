@@ -26,7 +26,7 @@ abstract class BaseRepository
         return app($this->model)->query()->get();
     }
 
-    public function store($data, string $file): Model
+    public function store($data, string $file = null): Model
     {
         $model = app($this->model)->query()->create($data->toArray());
 
@@ -42,7 +42,7 @@ abstract class BaseRepository
         return app($this->model)->query()->findOrFail($id);
     }
 
-    public function update($data, string $id, string $file): Model
+    public function update($data, string $id, string $file = null): Model
     {
         $model = app($this->model)->query()->findOrFail($id);
 
