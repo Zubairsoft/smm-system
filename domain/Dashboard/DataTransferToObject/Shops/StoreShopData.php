@@ -2,10 +2,13 @@
 
 namespace Domain\Dashboard\DataTransferToObject\Shops;
 
+use Domain\Dashboard\DataTransferToObject\BankAccounts\StoreBankAccountData;
 use Domain\Supports\Concerns\Requests\HasFailedValidationDtoRequest;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\File;
+use Spatie\LaravelData\Attributes\DataCollectionOf;
+use Spatie\LaravelData\DataCollection;
 use Spatie\LaravelData\Data;
 
 class StoreShopData extends Data
@@ -22,6 +25,8 @@ class StoreShopData extends Data
         public string $phone,
         public ?string $password = "0000",
         public ?bool $is_active = true,
+        #[DataCollectionOf(StoreBankAccountData::class)]
+        public DataCollection $bank_accounts
     ) {
     }
 
@@ -43,7 +48,7 @@ class StoreShopData extends Data
             'email' => [
                 'required',
                 'email',
-                Rule::unique('shops','email'),
+                Rule::unique('shops', 'email'),
                 'max:255',
             ],
             'avatar' => [
@@ -53,7 +58,7 @@ class StoreShopData extends Data
             'phone' => [
                 'required',
                 'max:100',
-                Rule::unique('shops','phone'),
+                Rule::unique('shops', 'phone'),
             ],
             'description' => [
                 'required',
