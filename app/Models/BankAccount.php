@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Domain\Supports\Enums\CurrencyEnum;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class BankAccount extends BaseModel
@@ -14,7 +15,9 @@ class BankAccount extends BaseModel
         'currency',
     ];
 
-    protected $casts = [];
+    protected $casts = [
+        'currency' => CurrencyEnum::class
+    ];
 
     public function owner()
     {
