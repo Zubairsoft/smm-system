@@ -16,7 +16,7 @@ return new class extends Migration
             $table->uuidMorphs('owner');
             $table->foreignUuid('bank_id')->constrained('banks');
             $table->string('account_number');
-            $table->string('currency', 100);
+            $table->tinyInteger('currency');
 
             $table->softDeletes();
             $table->timestamps();
