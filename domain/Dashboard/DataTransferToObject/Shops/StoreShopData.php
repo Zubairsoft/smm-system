@@ -10,12 +10,15 @@ use Illuminate\Validation\Rules\File;
 use Spatie\LaravelData\Attributes\DataCollectionOf;
 use Spatie\LaravelData\DataCollection;
 use Spatie\LaravelData\Data;
+use Spatie\LaravelData\Optional;
 
 class StoreShopData extends Data
 {
     use HasFailedValidationDtoRequest;
 
     public function __construct(
+        #[DataCollectionOf(StoreBankAccountData::class)]
+        public DataCollection $bank_accounts,
         public string $name,
         public string $owner_name,
         public string $address, //TODO make foreign key
@@ -23,10 +26,8 @@ class StoreShopData extends Data
         public string $description,
         public UploadedFile $avatar,
         public string $phone,
-        public ?string $password = "0000",
-        public ?bool $is_active = true,
-        #[DataCollectionOf(StoreBankAccountData::class)]
-        public DataCollection $bank_accounts
+        public string $password = "0000",
+        public bool $is_active = true,
     ) {
     }
 

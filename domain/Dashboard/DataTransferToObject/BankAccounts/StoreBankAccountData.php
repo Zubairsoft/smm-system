@@ -31,7 +31,7 @@ class StoreBankAccountData extends Data
             ],
             'currency' => [
                 'required',
-                Rule::in(CurrencyEnum::getKeys()),
+                Rule::in(CurrencyEnum::getValues()),
             ],
         ];
     }
