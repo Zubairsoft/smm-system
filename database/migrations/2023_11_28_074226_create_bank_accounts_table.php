@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('account_number');
             $table->tinyInteger('currency');
 
+            $table->index(['bank_id', 'owner_id']);
             $table->softDeletes();
             $table->timestamps();
         });
