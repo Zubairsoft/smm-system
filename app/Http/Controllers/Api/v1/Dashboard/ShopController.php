@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\v1\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Dashboard\Shops\ShopResource;
+use App\Models\Shop;
 use Domain\Dashboard\DataTransferToObject\Shops\StoreShopData;
 use Domain\Dashboard\DataTransferToObject\Shops\UpdateShopData;
 use Illuminate\Http\JsonResponse;
@@ -27,7 +28,9 @@ class ShopController extends Controller
 
     public function store(StoreShopData $request): JsonResponse
     {
-        $shop = $this->repository->store($request, 'avatar');
+        $shop = $this->repository->store($request);
+
+        $this->repository->addMedia($request, $shop, 'avatar', 'avatar');
 
         return sendSuccessResponse(message: __('messages.create_data'), data: ShopResource::make($shop));
     }
@@ -42,6 +45,8 @@ class ShopController extends Controller
     public function update(UpdateShopData $request, string $id): JsonResponse
     {
         $shop = $this->repository->update($request, $id, 'avatar');
+
+        $this->repository->addMedia($request, $shop, 'avatar', 'avatar');
 
         return sendSuccessResponse(message: __('messages.update_data'), data: ShopResource::make($shop));
     }
