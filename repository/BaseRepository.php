@@ -26,15 +26,10 @@ abstract class BaseRepository
         return app($this->model)->query()->get();
     }
 
-    public function store($data, string $file = null): Model
+    public function store($data): Model
     {
         $model = app($this->model)->query()->create($data->toArray());
 
-        if ($file) {
-            if (isFile($data->{$file})) {
-                $model->addMedia($data->{$file})->toMediaCollection('avatar');
-            }
-          }
         return $model;
     }
 
@@ -49,11 +44,11 @@ abstract class BaseRepository
 
         $model->update($data->toArray());
 
-      if ($file) {
-        if (isFile($data->{$file})) {
-            $model->addMedia($data->{$file})->toMediaCollection('avatar');
+        if ($file) {
+            if (isFile($data->{$file})) {
+                $model->addMedia($data->{$file})->toMediaCollection('avatar');
+            }
         }
-      }
 
         return $model->refresh();
     }
@@ -63,5 +58,14 @@ abstract class BaseRepository
         $model = app($this->model)->query()->findOrFail($id);
 
         $model->delete();
+    }
+
+    public function addMedia($data, Model $model, string $file, string $collection): void
+    {
+        if ($file) {
+            if (isFile($data->{$file})) {
+                $model->addMedia($data->{$file})->toMediaCollection($collection);
+            }
+        }
     }
 }
