@@ -29,7 +29,7 @@ class UpdateBankAccountData extends Data
                 'numeric'
             ],
             'currency' => [
-                Rule::in(CurrencyEnum::getKeys()),
+                Rule::in(CurrencyEnum::getValues()),
             ],
         ];
     }
