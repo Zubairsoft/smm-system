@@ -25,15 +25,15 @@ Route::middleware('auth:admin-api')
                 Route::patch('/{id}', 'update');
                 Route::delete('/{id}', 'destroy');
 
-                // Route::name('bank-accounts.')
-                //     ->prefix('{id}/bank-accounts')
-                //     ->controller(BankAccountController::class)->group(function () {
-                //         Route::get('/', 'index');
-                //         Route::post('/', 'store');
-                //         Route::get('/{id}', 'show');
-                //         Route::patch('/{id}', 'update');
-                //         Route::delete('/{id}', 'destroy');
-                //     });
+                Route::name('bank-accounts.')
+                    ->prefix('{id}/bank-accounts')
+                    ->controller(BankAccountController::class)->group(function () {
+                        Route::get('/', 'index');
+                        Route::post('/', 'store');
+                        Route::get('/{bankAccountId}', 'show');
+                        Route::patch('/{bankAccountId}', 'update');
+                        Route::delete('/{bankAccountId}', 'destroy');
+                    });
             });
 
         Route::name('banks')
