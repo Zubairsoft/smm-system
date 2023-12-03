@@ -5,7 +5,6 @@ namespace App\Models;
 use Domain\Dashboard\Attributes\AdminAttributes;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Sanctum\HasApiTokens;
-use Spatie\Permission\Contracts\Role;
 use Spatie\Permission\Traits\HasRoles;
 
 class Admin extends BaseModel
@@ -27,4 +26,6 @@ class Admin extends BaseModel
     protected $casts = [
         'is_active' => 'boolean'
     ];
+
+    
 }
