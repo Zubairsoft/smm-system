@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Admin;
+use App\Models\Shop;
 use App\Models\User;
 
 return [
@@ -55,6 +56,14 @@ return [
             'driver' => 'sanctum',
             'provider' => 'admins',
         ],
+        'shop-web' => [
+            'driver' => 'session',
+            'provider' => 'shops',
+        ],
+        'shop-api' => [
+            'driver' => 'sanctum',
+            'provider' => 'shops',
+        ],
     ],
 
     /*
@@ -83,6 +92,11 @@ return [
         'admins' => [
             'driver' => 'eloquent',
             'model' => Admin::class,
+        ],
+
+        'shops' => [
+            'driver' => 'eloquent',
+            'model' => Shop::class,
         ],
     ],
 
