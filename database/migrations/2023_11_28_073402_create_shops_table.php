@@ -16,7 +16,9 @@ return new class extends Migration
             $table->string('name');
             $table->string('owner_name');
             $table->string('email');
+            $table->string('email_verified_at')->nullable();
             $table->string('phone');
+            $table->string('phone_verified_at')->nullable();
             $table->string('password');
             $table->text('description');
             $table->string('address'); //TODO it will foreign key
