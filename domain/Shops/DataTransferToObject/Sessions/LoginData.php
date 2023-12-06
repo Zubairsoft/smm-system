@@ -3,6 +3,7 @@
 namespace Domain\Shops\DataTransferToObject\Sessions;
 
 use Domain\Supports\Concerns\Requests\HasFailedValidationDtoRequest;
+use Illuminate\Validation\Rule;
 use Spatie\LaravelData\Data;
 
 class LoginData extends Data
@@ -20,7 +21,8 @@ class LoginData extends Data
         return [
             'email' => [
                 'required',
-                'max:100'
+                'max:100',
+                Rule::exists('shops', 'email')
             ],
             'password' => [
                 'required',
