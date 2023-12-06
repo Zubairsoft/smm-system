@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('password');
             $table->text('description');
             $table->string('address'); //TODO it will foreign key
-            $table->boolean('is_active')->default(true);
+            $table->boolean('is_active')->default(false);
 
             $table->softDeletes();
             $table->timestamps();
