@@ -50,6 +50,11 @@ class Shop extends BaseModel implements HasMedia
         return $this->morphOne(VerifyEmail::class, 'verifiable');
     }
 
+    public function verifyPhone(): MorphOne
+    {
+        return $this->morphOne(VerifyPhone::class, 'verifiable');
+    }
+
     public function bankAccounts(): MorphMany
     {
         return $this->morphMany(BankAccount::class, 'owner');
