@@ -9,4 +9,14 @@ Route::name('sessions')
         Route::post('register', 'register');
         Route::post('login', 'login');
         Route::post('logout', 'logout')->middleware('auth:sanctum');
+        
+        Route::prefix('activate-emails')->group(function () {
+            Route::post('resend-verification-code', 'resendEmailVerificationCode');
+            Route::patch('/', 'activateEmail');
+        });
+
+        Route::prefix('activate-phones')->group(function () {
+            Route::post('resend-verification-code', 'resendPhoneVerificationCode');
+            Route::patch('/', 'activatePhone');
+        });
     });
