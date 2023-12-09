@@ -11,6 +11,6 @@ class ShopObserver
      */
     public function created(Shop $shop): void
     {
-        $shop->sendEmailVerification();
+        $shop->sendEmailVerificationCode($shop->email);
     }
 }
