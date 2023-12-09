@@ -5,21 +5,27 @@ namespace Domain\Shops\DataTransferToObject\Sessions;
 use Domain\Supports\Concerns\Requests\HasFailedValidationDtoRequest;
 use Spatie\LaravelData\Data;
 
-class ResendEmailVerificationCodeData extends Data
+class ActivatePhoneData extends Data
 {
     use HasFailedValidationDtoRequest;
 
     public function __construct(
-        public string $email,
+        public string $id,
+        public int $otp,
+
     ) {
     }
 
     public static function rules(): array
     {
         return [
-            'email' => [
+            'id' => [
                 'required',
-                'email',
+                'uuid',
+            ],
+            'otp' => [
+                'required',
+                'integer',
             ]
         ];
     }
