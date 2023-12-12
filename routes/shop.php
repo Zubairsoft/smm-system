@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\v1\Shops\BankAccountController;
 use App\Http\Controllers\Api\v1\Shops\SessionController;
 use Illuminate\Support\Facades\Route;
 
@@ -8,8 +9,8 @@ Route::name('sessions')
     ->controller(SessionController::class)->group(function () {
         Route::post('register', 'register');
         Route::post('login', 'login');
-        Route::post('logout', 'logout')->middleware('auth:sanctum');
-        
+        Route::post('logout', 'logout')->middleware('auth:shop-api');
+
         Route::prefix('activate-emails')->group(function () {
             Route::post('resend-verification-code', 'resendEmailVerificationCode');
             Route::patch('/', 'activateEmail');
@@ -20,3 +21,15 @@ Route::name('sessions')
             Route::patch('/', 'activatePhone');
         });
     });
+
+Route::middleware('auth:shop-api')->group(function () {
+    Route::prefix('bank-accounts')
+        ->controller(BankAccountController::class)
+        ->group(function () {
+            Route::get('/', 'index');
+            Route::post('/', 'store');
+            Route::get('/{id}', 'show');
+            Route::patch('/{id}', 'update');
+            Route::delete('/{id}', 'destroy');
+        });
+});
