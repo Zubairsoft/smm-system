@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
+use Domain\Supports\Scopes\ActiveScopeTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Bank extends BaseModel
 {
-    use SoftDeletes;
+    use SoftDeletes, ActiveScopeTrait;
 
     protected $fillable = [
         'name',
