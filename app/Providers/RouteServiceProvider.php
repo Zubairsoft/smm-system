@@ -32,6 +32,7 @@ class RouteServiceProvider extends ServiceProvider
             $this->apiRouteMap();
             $this->dashboardRouteMap();
             $this->shopRouteMap();
+            $this->supportsRouteMap();
             $this->webRouteMap();
         });
     }
@@ -57,6 +58,14 @@ class RouteServiceProvider extends ServiceProvider
             ->name('shops.')
             ->prefix('api/v1/shops/')
             ->group(base_path('routes/shop.php'));
+    }
+
+    private function supportsRouteMap()
+    {
+        Route::middleware('api')
+            ->name('supports.')
+            ->prefix('api/v1/supports/')
+            ->group(base_path('routes/support.php'));
     }
 
     private function webRouteMap()
