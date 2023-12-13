@@ -3,7 +3,7 @@
 namespace Repository;
 
 use App\Models\Bank;
-use App\Models\Shop;
+use Illuminate\Database\Eloquent\Collection;
 
 class BankRepository extends BaseRepository
 {
@@ -14,4 +14,8 @@ class BankRepository extends BaseRepository
         $this->model = Bank::class;
     }
 
+    public function list(): Collection
+    {
+        return app($this->model)->query()->active()->get();
+    }
 }
