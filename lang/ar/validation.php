@@ -183,7 +183,10 @@ return [
         'is_publish_ar' => 'هل هو منشور باللغة العربية',
         'is_publish_en' => 'هل هو منشور باللغة الانجليزية',
         'poster' => 'البوستر',
-        'owner_name' => 'التاجر'
+        'owner_name' => 'التاجر',
+        'account_number' => 'رقم الحساب',
+        'bank_id' => 'معرق البنك',
+        'currency' => 'العملة',
         //'images'=>'البوستر',
 
     ],
