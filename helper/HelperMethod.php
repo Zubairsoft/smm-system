@@ -4,6 +4,7 @@ use App\Exceptions\LogicException;
 use App\Models\Admin;
 use App\Models\Shop;
 use App\Models\User;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -34,5 +35,12 @@ function currentUser(string $guard): Shop|User|Admin
         throw new LogicException('invalid guard', 403);
     }
 
-    return Auth::guard($guard)->user();
+    $user= Auth::guard($guard)->user();
+
+    if(!$user)
+    {
+        throw new AuthenticationException();
+    }
+
+    return $user;
 }
