@@ -6,15 +6,16 @@ use Domain\Supports\Concerns\Requests\HasFailedValidationDtoRequest;
 use Domain\Supports\Enums\CurrencyEnum;
 use Illuminate\Validation\Rule;
 use Spatie\LaravelData\Data;
+use Spatie\LaravelData\Optional;
 
 class UpdateBankAccountData extends Data
 {
     use HasFailedValidationDtoRequest;
 
     public function __construct(
-        public string $bank_id,
-        public string $account_number,
-        public string $currency,
+        public Optional|string $bank_id,
+        public Optional|string $account_number,
+        public Optional|string $currency,
     ) {
     }
 
@@ -22,15 +23,12 @@ class UpdateBankAccountData extends Data
     {
         return [
             'bank_id' => [
-                'required',
                 'max:100',
             ],
             'account_number' => [
-                'required',
                 'numeric'
             ],
             'currency' => [
-                'required',
                 Rule::in(CurrencyEnum::getValues()),
             ],
         ];
