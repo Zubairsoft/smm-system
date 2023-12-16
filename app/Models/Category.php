@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use Domain\Dashboard\Attributes\CategoryAttributes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Category extends BaseModel implements HasMedia
 {
-    use InteractsWithMedia;
-    
+    use InteractsWithMedia ,CategoryAttributes;
+
     protected $fillable = [
         'name_ar',
         'name_en',
