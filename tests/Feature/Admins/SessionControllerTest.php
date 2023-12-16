@@ -39,14 +39,35 @@ class SessionControllerTest extends TestCase
             'password' => defaultPassword(),
         ]);
 
-        $response->assertStatus(200);
+        $response->assertOk();
+
+        $response->assertJson([
+            'status' => 'success',
+            'message' => __('auth.success_login'),
+        ]);
     }
 
     public function test_logout()
     {
-        $token = ((new LoginAction)(new LoginData($this->admin->phone, defaultPassword())))->token;
-        $headers = ['Authorization' => "Bearer $token"];
+        $admin = (new LoginAction)(new LoginData($this->admin->phone, defaultPassword()));
+        $headers = ['Authorization' => "Bearer {$admin->token}"];
         $response = $this->postJson($this->url . '/sessions/logout', [], $headers);
-        $response->assertStatus(200);
+
+        $response->assertValid();
+
+        $response->assertOk();
+
+        $response->assertExactJson([
+            'status' => 'success',
+            'message' => __('auth.logout'),
+            'data' => null
+        ]);
+    }
+
+    public function test_unauthorized_logout()
+    {
+        $response=$this->postJson($this->url.'/sessions/logout');
+
+        $response->assertUnauthorized();
     }
 }
