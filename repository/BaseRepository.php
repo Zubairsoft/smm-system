@@ -38,17 +38,11 @@ abstract class BaseRepository
         return app($this->model)->query()->findOrFail($id);
     }
 
-    public function update($data, string $id, string $file = null): Model
+    public function update($data, string $id): Model
     {
         $model = app($this->model)->query()->findOrFail($id);
 
         $model->update($data->toArray());
-
-        if ($file) {
-            if (isFile($data->{$file})) {
-                $model->addMedia($data->{$file})->toMediaCollection('avatar');
-            }
-        }
 
         return $model->refresh();
     }
