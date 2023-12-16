@@ -33,7 +33,7 @@ abstract class BaseRepository
         return $model;
     }
 
-    public function show($id): Model
+    public function show(string $id): Model
     {
         return app($this->model)->query()->findOrFail($id);
     }
@@ -53,7 +53,7 @@ abstract class BaseRepository
         return $model->refresh();
     }
 
-    public function destroy($id): void
+    public function destroy(string $id): void
     {
         $model = app($this->model)->query()->findOrFail($id);
 
