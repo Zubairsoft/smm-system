@@ -4,6 +4,8 @@ use App\Http\Controllers\Api\v1\Dashboard\BankAccountController;
 use App\Http\Controllers\Api\v1\Dashboard\BankController;
 use App\Http\Controllers\Api\v1\Dashboard\BrandController;
 use App\Http\Controllers\Api\v1\Dashboard\CategoryController;
+use App\Http\Controllers\Api\v1\Dashboard\ProductAttributeController;
+use App\Http\Controllers\Api\v1\Dashboard\ProductAttributeDetailController;
 use App\Http\Controllers\Api\v1\Dashboard\SessionController;
 use App\Http\Controllers\Api\v1\Dashboard\ShopController;
 use Illuminate\Support\Facades\Route;
@@ -66,5 +68,25 @@ Route::middleware('auth:admin-api')
                 Route::get('/{id}', 'show');
                 Route::patch('/{id}', 'update');
                 Route::delete('/{id}', 'destroy');
+            });
+
+        Route::name('product-attributes.')
+            ->prefix('product-attributes')
+            ->controller(ProductAttributeController::class)->group(function () {
+                Route::get('/', 'index');
+                Route::post('/', 'store');
+                Route::get('/{id}', 'show');
+                Route::patch('/{id}', 'update');
+                Route::delete('/{id}', 'destroy');
+
+                Route::name('product-attribute-details.')
+                    ->prefix('{id}/product-attributes-details')
+                    ->controller(ProductAttributeDetailController::class)->group(function () {
+                        Route::get('/', 'index');
+                        Route::post('/', 'store');
+                        Route::get('/{productAttributeDetailId}', 'show');
+                        Route::patch('/{productAttributeDetailId}', 'update');
+                        Route::delete('/{productAttributeDetailId}', 'destroy');
+                    });
             });
     });
