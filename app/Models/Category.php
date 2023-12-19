@@ -3,12 +3,13 @@
 namespace App\Models;
 
 use Domain\Dashboard\Attributes\CategoryAttributes;
+use Domain\Supports\Scopes\ActiveScopeTrait;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Category extends BaseModel implements HasMedia
 {
-    use InteractsWithMedia ,CategoryAttributes;
+    use InteractsWithMedia, CategoryAttributes, ActiveScopeTrait;
 
     protected $fillable = [
         'name_ar',

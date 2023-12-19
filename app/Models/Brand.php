@@ -3,12 +3,13 @@
 namespace App\Models;
 
 use Domain\Dashboard\Attributes\BrandAttributes;
+use Domain\Supports\Scopes\ActiveScopeTrait;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Brand extends BaseModel implements HasMedia
 {
-    use InteractsWithMedia, BrandAttributes;
+    use InteractsWithMedia, BrandAttributes, ActiveScopeTrait;
 
     protected $fillable = [
         'name_ar',
