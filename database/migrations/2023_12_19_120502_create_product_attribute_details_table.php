@@ -19,6 +19,9 @@ return new class extends Migration
             $table->boolean('is_active')->default(false);
 
             $table->foreign('product_attribute_id')->references('id')->on('product_attributes')->onDelete('cascade');
+
+            $table->timestamps();
+
         });
     }
 
