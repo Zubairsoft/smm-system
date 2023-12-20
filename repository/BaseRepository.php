@@ -3,14 +3,15 @@
 namespace Repository;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\LaravelData\Data;
 
 abstract class BaseRepository
 {
-    protected $model;
+    protected  $model;
 
     abstract protected function setData();
 
-    public function setModel($model)
+    public function setModel(string $model)
     {
         $this->model = $model;
     }
@@ -26,11 +27,11 @@ abstract class BaseRepository
         return app($this->model)->query()->get();
     }
 
-    public function store($data): Model
+    public function store(Data $data): Model
     {
         $model = app($this->model)->query()->create($data->toArray());
 
-        return $model;
+        return $model->refresh();
     }
 
     public function show(string $id): Model
@@ -38,7 +39,7 @@ abstract class BaseRepository
         return app($this->model)->query()->findOrFail($id);
     }
 
-    public function update($data, string $id): Model
+    public function update(Data $data, string $id): Model
     {
         $model = app($this->model)->query()->findOrFail($id);
 
@@ -54,7 +55,7 @@ abstract class BaseRepository
         $model->delete();
     }
 
-    public function addMedia($data, Model $model, string $file, string $collection): void
+    public function addMedia(Data $data, Model $model, string $file, string $collection): void
     {
         if ($file) {
             if (isFile($data->{$file})) {
