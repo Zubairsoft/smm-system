@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Domain\Dashboard\Attributes\ShopAttributes;
 use Domain\Supports\Concerns\Verifies\HasActivateAccount;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -58,5 +59,10 @@ class Shop extends BaseModel implements HasMedia
     public function bankAccounts(): MorphMany
     {
         return $this->morphMany(BankAccount::class, 'owner');
+    }
+
+    public function products():HasMany
+    {
+        return $this->hasMany(Product::class);
     }
 }
