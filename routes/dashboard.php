@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\v1\Dashboard\ProductAttributeController;
 use App\Http\Controllers\Api\v1\Dashboard\ProductAttributeDetailController;
 use App\Http\Controllers\Api\v1\Dashboard\SessionController;
 use App\Http\Controllers\Api\v1\Dashboard\ShopController;
+use App\Http\Controllers\Api\v1\Dashboard\TagController;
 use Illuminate\Support\Facades\Route;
 
 Route::name('session.')
@@ -63,6 +64,16 @@ Route::middleware('auth:admin-api')
         Route::name('brands.')
             ->prefix('brands')
             ->controller(BrandController::class)->group(function () {
+                Route::get('/', 'index');
+                Route::post('/', 'store');
+                Route::get('/{id}', 'show');
+                Route::patch('/{id}', 'update');
+                Route::delete('/{id}', 'destroy');
+            });
+
+        Route::name('tags.')
+            ->prefix('tags')
+            ->controller(TagController::class)->group(function () {
                 Route::get('/', 'index');
                 Route::post('/', 'store');
                 Route::get('/{id}', 'show');

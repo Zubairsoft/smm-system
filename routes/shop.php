@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\v1\Shops\BankAccountController;
+use App\Http\Controllers\Api\v1\Shops\ProductController;
 use App\Http\Controllers\Api\v1\Shops\SessionController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +26,16 @@ Route::name('sessions')
 Route::middleware('auth:shop-api')->group(function () {
     Route::prefix('bank-accounts')
         ->controller(BankAccountController::class)
+        ->group(function () {
+            Route::get('/', 'index');
+            Route::post('/', 'store');
+            Route::get('/{id}', 'show');
+            Route::patch('/{id}', 'update');
+            Route::delete('/{id}', 'destroy');
+        });
+
+    Route::prefix('products')
+        ->controller(ProductController::class)
         ->group(function () {
             Route::get('/', 'index');
             Route::post('/', 'store');
