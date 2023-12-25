@@ -142,6 +142,10 @@ return [
     'password_timeout' => 10800,
 
     'admin-web-guard' => 'admin-web',
+    'admin-api-guard' => 'admin-api',
+    'shop-api-guard' => 'shop-api',
+
+
 
 
 ];
