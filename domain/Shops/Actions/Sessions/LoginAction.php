@@ -19,7 +19,7 @@ class LoginAction
 
         throw_if(!(new VerifiedEmail($shop))->isAllow(), new LogicException(__('auth.verify_email'), 403, 'email'));
 
-        throw_if(!(new VerifiedPhone($shop))->isAllow(), new LogicException(__('auth.phone'), 422, 'phone'));
+        throw_if(!(new VerifiedPhone($shop))->isAllow(), new LogicException(__('auth.verify_phone'), 422, 'phone'));
 
         throw_if(!(new ActivatedAccount($shop))->isAllow(), new LogicException(__('auth.not_activated_account'), 422, 'email'));
 

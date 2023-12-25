@@ -42,7 +42,6 @@ class Product extends BaseModel implements HasMedia
             ->singleFile();
 
         $this->addMediaCollection('product_images')
-            ->singleFile();
     }
 
     public function shop(): BelongsTo

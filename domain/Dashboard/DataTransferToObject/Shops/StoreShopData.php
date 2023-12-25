@@ -18,7 +18,7 @@ class StoreShopData extends Data
 
     public function __construct(
         #[DataCollectionOf(StoreBankAccountData::class)]
-        public DataCollection $bank_accounts,
+        public DataCollection $bank_accounts,//TODO update validation
         public string $name,
         public string $owner_name,
         public string $address, //TODO make foreign key
