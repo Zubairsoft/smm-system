@@ -3,6 +3,7 @@
 namespace Repository;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\LaravelData\Data;
 
 abstract class BaseTwoParmCrudRepository
 {
@@ -23,14 +24,14 @@ abstract class BaseTwoParmCrudRepository
     }
 
 
-    public function index($id)
+    public function index(string $id)
     {
         $model = app($this->model)->query()->findOrFail($id);
 
         return  $model->{$this->relationship};
     }
 
-    public function store($data, string $id): Model
+    public function store(Data $data, string $id): Model
     {
         $model = app($this->model)->query()->findOrFail($id);
 
@@ -46,7 +47,7 @@ abstract class BaseTwoParmCrudRepository
         return $model->{$this->relationship}()->findOrFail($modelId);
     }
 
-    public function update($data, string $id, string $modelId): Model
+    public function update(Data $data, string $id, string $modelId): Model
     {
         $model = app($this->model)->query()->findOrFail($id);
 
