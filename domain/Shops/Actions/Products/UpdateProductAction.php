@@ -15,12 +15,12 @@ final class UpdateProductAction
 
         $product->update($data->toArray());
 
-        if ($data->image) {
+        if (isFile($data->image)) {
             $product->addMedia($data->image)->toMediaCollection('image');
         }
 
-        if ($data->product_images) {
-            addMultipleMedia($product, $data->product_images, 'product_images');
+        if (isFile($data->image)) {
+            addMultipleMedia($product, 'product_images', 'product_images');
         }
 
         if ($data->tags) {

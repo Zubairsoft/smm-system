@@ -15,11 +15,11 @@ final class StoreProductAction
 
         $product->addMedia($data->image)->toMediaCollection('image');
 
-        addMultipleMedia($product, $data->product_images, 'product_images');
+        addMultipleMedia($product, 'product_images', 'product_images');
 
-        if ($data->tags) {
+        if ($data->tag_ids) {
 
-            $product->tags()->sync($data->tags);
+            $product->tags()->sync($data->tag_ids);
         }
 
         return $product;
