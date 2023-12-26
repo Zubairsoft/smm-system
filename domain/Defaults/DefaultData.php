@@ -2,48 +2,22 @@
 
 namespace Domain\Defaults;
 
+use Domain\Defaults\Data\BankData;
+use Domain\Defaults\Data\BrandData;
+
 class DefaultData
 {
+    use BankData, BrandData;
 
-    public static function banks(): array
+    public static function categories()
     {
         return [
             [
-                'id' => uuid_create(),
-                'name' => 'العمقي',
+             // 'id' => uuid_create(),
+                'name_ar' => 'الحميع',
+                'name_en' => 'All',
                 'is_active' => true,
-            ],
-
-            [
-                'id' => uuid_create(),
-                'name' => 'بن دول',
-                'is_active' => true,
-            ],
-            [
-                'id' => uuid_create(),
-                'name' => 'البسيري',
-                'is_active' => true,
-            ],
-            [
-                'id' => uuid_create(),
-                'name' => 'الكريمي',
-                'is_active' => true,
-            ],
-            [
-                'id' => uuid_create(),
-                'name' => 'البيضاني',
-                'is_active' => true,
-            ],
-            [
-                'id' => uuid_create(),
-                'name' => 'الاكوع',
-                'is_active' => true,
-            ],
-            [
-                'id' => uuid_create(),
-                'name' => 'المحضار',
-                'is_active' => true,
-            ],
+            ]
         ];
     }
 }
