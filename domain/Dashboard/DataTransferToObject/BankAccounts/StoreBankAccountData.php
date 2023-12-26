@@ -24,6 +24,7 @@ class StoreBankAccountData extends Data
             'bank_id' => [
                 'required',
                 'max:100',
+                Rule::exists('banks', 'id')
             ],
             'account_number' => [
                 'required',

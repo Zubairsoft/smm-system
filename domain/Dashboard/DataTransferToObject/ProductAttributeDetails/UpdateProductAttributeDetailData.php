@@ -11,8 +11,8 @@ class UpdateProductAttributeDetailData extends Data
     use HasFailedValidationDtoRequest;
 
     public function __construct(
-        public string $name_ar,
-        public string $name_en,
+        public Optional|string $name_ar,
+        public Optional|string $name_en,
         public Optional|bool $is_active,
     ) {
     }

@@ -23,7 +23,6 @@ class UpdateProductData extends Data
         public Optional|float $additional_price_for_color,
         public Optional|float $discount,
         public Optional|float $price,
-        public Optional|float $total_price,
         public Optional|array $tags,
         public Optional|string $category_id,
         public Optional|string $brand_id,
