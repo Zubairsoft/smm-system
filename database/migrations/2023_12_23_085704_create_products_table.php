@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('shop_id');
-            $table->uuid('product_attribute_detail_id');
-            $table->uuid('category_id');
-            $table->uuid('brand_id');
+            $table->foreignUuid('shop_id')->constrained();
+            $table->foreignUuid('product_attribute_detail_id')->constrained();
+            $table->foreignUuid('category_id')->constrained();
+            $table->foreignUuid('brand_id')->constrained();
             $table->string('name');
             $table->text('description');
             $table->string('colors');
@@ -31,11 +31,7 @@ return new class extends Migration
             $table->boolean('can_refund_money')->default(true);
             $table->boolean('can_show_quantity')->default(true);
 
-            $table->foreign('shop_id')->references('id')->on('shops');
-            $table->foreign('product_attribute_detail_id')->references('id')->on('product_attribute_details');
-            $table->foreign('category_id')->references('id')->on('categories');
-            $table->foreign('brand_id')->references('id')->on('brands');
-            $table->index(['shop_id','product_attribute_detail_id','category_id','brand_id','name']);
+            $table->index(['shop_id', 'category_id', 'brand_id', 'name']);
 
             $table->timestamps();
         });
