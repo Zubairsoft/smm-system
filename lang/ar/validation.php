@@ -187,8 +187,17 @@ return [
         'account_number' => 'رقم الحساب',
         'bank_id' => 'معرق البنك',
         'currency' => 'العملة',
-        //'images'=>'البوستر',
-
+        'image' => 'الصوره',
+        'product_colors' => 'الالوان المنتج',
+        'price' => 'السعر',
+        'quantity' => 'الكمية',
+        'minimum_quantity' => 'الحد الادنى للكمية',
+        'category_id' => 'معرق الفئة',
+        'brand_id' => 'معرف العلامة التجارية',
+        'product_attribute_id' => 'معرف مواصفات المنتج',
+        'tag_ids' => 'معرفات التاق',
+        'product_attribute_detail_id' => 'معرف تفاصيل مواصفات المنتج',
+        'product_images' => 'صور المنتج',
     ],
 
     /*
