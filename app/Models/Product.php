@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Domain\Shops\Attributes\ProductAttributes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Spatie\MediaLibrary\HasMedia;
@@ -9,7 +10,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Product extends BaseModel implements HasMedia
 {
-    use InteractsWithMedia;
+    use InteractsWithMedia, ProductAttributes;
 
     protected $fillable = [
         'name',
@@ -41,7 +42,22 @@ class Product extends BaseModel implements HasMedia
         $this->addMediaCollection('image')
             ->singleFile();
 
-        $this->addMediaCollection('product_images')
+        $this->addMediaCollection('product_images');
+    }
+
+    public function calculateTotalPrice(): float
+    {
+        return $this->getTotalPriceWithoutDiscount() - $this->getDiscount();
+    }
+
+    private function getDiscount(): int
+    {
+        return $this->getTotalPriceWithoutDiscount() * ($this->discount / 100);
+    }
+
+    private function getTotalPriceWithoutDiscount(): float
+    {
+        return ($this->price + $this->additional_price_for_color + $this->additional_price_for_size);
     }
 
     public function shop(): BelongsTo
