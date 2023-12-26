@@ -46,9 +46,9 @@ function currentUser(string $guard): Shop|User|Admin
     return $user;
 }
 
-function addMultipleMedia($model, array $media,string $collection)
+function addMultipleMedia($model, string $keyNameFromRequest, string $collection)
 {
-    $model->addMultipleMediaFromRequest($media)
+    $model->addMultipleMediaFromRequest([$keyNameFromRequest])
         ->each(
             fn ($fileAdder) =>
             $fileAdder->toMediaCollection($collection)
