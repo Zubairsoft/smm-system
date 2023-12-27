@@ -22,6 +22,6 @@ final class StoreProductAction
             $product->tags()->sync($data->tag_ids);
         }
 
-        return $product;
+        return $product->refresh();
     }
 }
