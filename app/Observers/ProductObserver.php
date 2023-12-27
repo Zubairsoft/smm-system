@@ -8,7 +8,14 @@ class ProductObserver
 {
 
     /**
-     * Handle the Product "updated" event.
+     * Handle the Product "creating" event.
+     */
+    public function creating(Product $product): void
+    {
+        $product->total_price = $product->calculateTotalPrice();
+    }
+    /**
+     * Handle the Product "updating" event.
      */
     public function updating(Product $product): void
     {
