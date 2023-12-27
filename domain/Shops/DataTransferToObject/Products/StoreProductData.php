@@ -21,7 +21,6 @@ class StoreProductData extends Data
         public string $colors,
         public float $quantity,
         public float $price,
-        public Optional|float $total_price,
         public Optional|array $tag_ids,
         public string $category_id,
         public string $brand_id,
@@ -36,7 +35,6 @@ class StoreProductData extends Data
         public float $additional_price_for_color = 0,
         public float $discount = 0,
     ) {
-        $this->total_price=$this->getTotalPrice();
     }
 
     public static function rules(): array
@@ -119,18 +117,4 @@ class StoreProductData extends Data
         ];
     }
 
-    private function getTotalPrice(): float
-    {
-        return $this->getTotalPriceWithoutDiscount() - $this->getDiscount();
-    }
-
-    private function getDiscount(): int
-    {
-        return $this->getTotalPriceWithoutDiscount() * ($this->discount / 100);
-    }
-
-    private function getTotalPriceWithoutDiscount(): float
-    {
-        return ($this->price + $this->additional_price_for_color + $this->additional_price_for_size);
-    }
 }
