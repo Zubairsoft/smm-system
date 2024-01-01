@@ -1,16 +1,17 @@
 <?php
 
-use Domains\Admins\Enums\ReportStatusEnum;
-use Domains\Supports\Enums\GenderEnum;
+use Domain\Shops\Enums\CoboneTypeEnum;
+use Domain\Supports\Enums\CurrencyEnum;
 
 return [
-    GenderEnum::class => [
-        GenderEnum::MALE => 'MALE',
-        GenderEnum::FEMALE => 'FEMALE',
+    CurrencyEnum::class => [
+        CurrencyEnum::SAR => 'Saudi Real',
+        CurrencyEnum::YER => 'Yemeni Real',
+        CurrencyEnum::USD => '$',
+        CurrencyEnum::UAE => 'UAE Drhum',
     ],
-    ReportStatusEnum::class => [
-        ReportStatusEnum::NEW => 'New',
-        ReportStatusEnum::READ => 'Read',
-        ReportStatusEnum::SOLVE => 'Solved',
+    CoboneTypeEnum::class => [
+        CoboneTypeEnum::TOTAL_ORDER => 'Total Order',
+        CoboneTypeEnum::SPECIFIC_PRODUCT => 'Specific Products',
     ]
 ];

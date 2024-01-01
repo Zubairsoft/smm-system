@@ -1,16 +1,17 @@
 <?php
 
-use Domains\Admins\Enums\ReportStatusEnum;
-use Domains\Supports\Enums\GenderEnum;
+use Domain\Shops\Enums\CoboneTypeEnum;
+use Domain\Supports\Enums\CurrencyEnum;
 
 return [
-    GenderEnum::class => [
-        GenderEnum::MALE => 'ذكر',
-        GenderEnum::FEMALE => 'انثى',
+    CurrencyEnum::class => [
+        CurrencyEnum::SAR => 'ريال سعودي',
+        CurrencyEnum::YER => 'ريال يمني',
+        CurrencyEnum::USD => 'دولار امريكي',
+        CurrencyEnum::UAE => 'درهم اماراتي',
     ],
-    ReportStatusEnum::class => [
-        ReportStatusEnum::NEW => 'جديد',
-        ReportStatusEnum::READ => 'تمت القراءة',
-        ReportStatusEnum::SOLVE => 'تم الحل',
+    CoboneTypeEnum::class => [
+        CoboneTypeEnum::TOTAL_ORDER => 'اخمالي الطلب',
+        CoboneTypeEnum::SPECIFIC_PRODUCT => 'منتجات محددة',
     ]
 ];
