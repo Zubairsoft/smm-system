@@ -61,8 +61,13 @@ class Shop extends BaseModel implements HasMedia
         return $this->morphMany(BankAccount::class, 'owner');
     }
 
-    public function products():HasMany
+    public function products(): HasMany
     {
         return $this->hasMany(Product::class);
+    }
+
+    public function cobones(): HasMany
+    {
+        return $this->hasMany(Cobone::class);
     }
 }
