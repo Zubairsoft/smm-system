@@ -18,6 +18,12 @@ abstract class BaseTwoParmCrudRepository
         $this->model = $model;
     }
 
+
+    protected function makeInstanceOfModel(): Model
+    {
+        return app($this->model);
+    }
+
     public function __construct()
     {
         $this->setData();
@@ -26,14 +32,14 @@ abstract class BaseTwoParmCrudRepository
 
     public function index(string $id)
     {
-        $model = app($this->model)->query()->findOrFail($id);
+        $model = $this->find($id);
 
         return  $model->{$this->relationship};
     }
 
     public function store(Data $data, string $id): Model
     {
-        $model = app($this->model)->query()->findOrFail($id);
+        $model = $this->find($id);
 
         $model = $model->{$this->relationship}()->create($data->toArray());
 
@@ -42,14 +48,14 @@ abstract class BaseTwoParmCrudRepository
 
     public function show(string $id, string $modelId): Model
     {
-        $model = app($this->model)->query()->findOrFail($id);
+        $model = $this->find($id);
 
         return $model->{$this->relationship}()->findOrFail($modelId);
     }
 
     public function update(Data $data, string $id, string $modelId): Model
     {
-        $model = app($this->model)->query()->findOrFail($id);
+        $model = $this->find($id);
 
         $model = $model->{$this->relationship}()->findOrFail($modelId);
 
@@ -60,7 +66,7 @@ abstract class BaseTwoParmCrudRepository
 
     public function destroy(string $id, string $modelId): void
     {
-        $model = app($this->model)->query()->findOrFail($id);
+        $model = $this->find($id);
 
         $model = $model->{$this->relationship}()->findOrFail($modelId);;
 
@@ -74,5 +80,10 @@ abstract class BaseTwoParmCrudRepository
                 $model->addMedia($data->{$file})->toMediaCollection($collection);
             }
         }
+    }
+
+    private function find(string $id): Model
+    {
+        return $this->makeInstanceOfModel()->query()->findOrFail($id);
     }
 }

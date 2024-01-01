@@ -16,6 +16,11 @@ abstract class BaseRepository
         $this->model = $model;
     }
 
+    protected function makeInstanceOfModel(): Model
+    {
+        return app($this->model);
+    }
+
     public function __construct()
     {
         $this->setData();
@@ -24,24 +29,24 @@ abstract class BaseRepository
 
     public function index()
     {
-        return app($this->model)->query()->get();
+        return  $this->makeInstanceOfModel()->query()->get();
     }
 
     public function store(Data $data): Model
     {
-        $model = app($this->model)->query()->create($data->toArray());
+        $model = $this->makeInstanceOfModel()->query()->create($data->toArray());
 
         return $model->refresh();
     }
 
     public function show(string $id): Model
     {
-        return app($this->model)->query()->findOrFail($id);
+        return  $this->find($id);
     }
 
     public function update(Data $data, string $id): Model
     {
-        $model = app($this->model)->query()->findOrFail($id);
+        $model = $this->find($id);
 
         $model->update($data->toArray());
 
@@ -50,7 +55,7 @@ abstract class BaseRepository
 
     public function destroy(string $id): void
     {
-        $model = app($this->model)->query()->findOrFail($id);
+        $model = $this->find($id);
 
         $model->delete();
     }
@@ -62,5 +67,10 @@ abstract class BaseRepository
                 $model->addMedia($data->{$file})->toMediaCollection($collection);
             }
         }
+    }
+
+    private function find(string $id): Model
+    {
+        return $this->makeInstanceOfModel()->query()->findOrFail($id);
     }
 }
