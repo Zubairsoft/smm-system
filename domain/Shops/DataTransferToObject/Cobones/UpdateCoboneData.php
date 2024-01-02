@@ -40,8 +40,12 @@ class UpdateCoboneData extends Data
             'total_order' => [
                 'numeric',
                 'min:1',
-                Rule::requiredIf(request()->cobone_type ? CoboneTypeEnum::TOTAL_ORDER()->is((int)request()->cobone_type) : false),
-                Rule::prohibitedIf(request()->cobone_type ? CoboneTypeEnum::SPECIFIC_PRODUCT()->is((int)request()->cobone_type) : false)
+                'total_order' => [
+                    'numeric',
+                    'min:1',
+                    Rule::requiredIf(request()->cobone_type ? CoboneTypeEnum::fromValue((int)request()->cobone_type)->is(CoboneTypeEnum::TOTAL_ORDER) : false),
+                    Rule::prohibitedIf(request()->cobone_type ? CoboneTypeEnum::fromValue((int)request()->cobone_type)->is(CoboneTypeEnum::SPECIFIC_PRODUCT) : false)
+                ],
             ],
         ];
     }
