@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use Domain\Shops\Attributes\CoboneAttributes;
 use Domain\Shops\Enums\CoboneTypeEnum;
 
 class Cobone extends BaseModel
 {
+    use CoboneAttributes;
 
     protected $fillable = [
         'token',
@@ -16,6 +18,6 @@ class Cobone extends BaseModel
     ];
 
     protected $casts = [
-        'status' => CoboneTypeEnum::class,
+        'type' => CoboneTypeEnum::class,
     ];
 }
