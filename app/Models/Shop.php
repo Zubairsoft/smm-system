@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Exceptions\LogicException;
 use Domain\Dashboard\Attributes\ShopAttributes;
 use Domain\Supports\Concerns\Verifies\HasActivateAccount;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -46,6 +47,15 @@ class Shop extends BaseModel implements HasMedia
             ->singleFile();
     }
 
+    public function checkProducts(array $products_ids): void
+    {
+        $products = $this->products()->whereIn('id', $products_ids)->pluck('id')->toArray();
+        
+        if (count($products) !== count($products_ids)) {
+            throw new LogicException(__('exceptions.record_not_found'), 404);
+        }
+    }
+
     public function verifyEmail(): MorphOne
     {
         return $this->morphOne(VerifyEmail::class, 'verifiable');
@@ -66,8 +76,8 @@ class Shop extends BaseModel implements HasMedia
         return $this->hasMany(Product::class);
     }
 
-    public function cobones(): HasMany
+    public function Coupons(): HasMany
     {
-        return $this->hasMany(Cobone::class);
+        return $this->hasMany(Coupon::class);
     }
 }

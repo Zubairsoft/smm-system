@@ -84,4 +84,9 @@ class Product extends BaseModel implements HasMedia
     {
         return $this->belongsToMany(Tag::class);
     }
+
+    public function coupons(): BelongsToMany
+    {
+        return $this->belongsToMany(Coupon::class)->withTimestamps();
+    }
 }
