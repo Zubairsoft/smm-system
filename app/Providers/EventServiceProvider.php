@@ -2,10 +2,10 @@
 
 namespace App\Providers;
 
-use App\Models\Cobone;
+use App\Models\Coupon;
 use App\Models\Product;
 use App\Models\Shop;
-use App\Observers\CoboneObserver;
+use App\Observers\CouponObserver;
 use App\Observers\ProductObserver;
 use App\Observers\ShopObserver;
 use Illuminate\Auth\Events\Registered;
@@ -28,7 +28,7 @@ class EventServiceProvider extends ServiceProvider
     protected $observers = [
         Shop::class => ShopObserver::class,
         Product::class => ProductObserver::class,
-        Cobone::class => CoboneObserver::class
+        Coupon::class => CouponObserver::class
     ];
 
     /**
