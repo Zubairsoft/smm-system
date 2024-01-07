@@ -198,7 +198,7 @@ return [
         'tag_ids' => 'معرفات التاق',
         'product_attribute_detail_id' => 'معرف تفاصيل مواصفات المنتج',
         'product_images' => 'صور المنتج',
-        'token' => 'الرمز',
+        'product_ids' => 'الرقم التسلسلي للمتجات',
         'cobone_type' => 'نوع الكيبون',
         'start_at' => 'تاريخ البداية',
         'end_at' => 'تاريخ الانتهاء',
