@@ -27,6 +27,11 @@ class CouponObserver
             if ($cobone->type->is(CouponTypeEnum::SPECIFIC_PRODUCT)) {
                 $cobone->total_order = null;
             }
+
+
+            if ($cobone->type->is(CouponTypeEnum::TOTAL_ORDER)) {
+                $cobone->products()->sync([]);
+            }
         }
     }
 }
