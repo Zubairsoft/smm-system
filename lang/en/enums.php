@@ -1,6 +1,6 @@
 <?php
 
-use Domain\Shops\Enums\CoboneTypeEnum;
+use Domain\Shops\Enums\CouponTypeEnum;
 use Domain\Supports\Enums\CurrencyEnum;
 
 return [
@@ -10,8 +10,8 @@ return [
         CurrencyEnum::USD => '$',
         CurrencyEnum::UAE => 'UAE Drhum',
     ],
-    CoboneTypeEnum::class => [
-        CoboneTypeEnum::TOTAL_ORDER => 'Total Order',
-        CoboneTypeEnum::SPECIFIC_PRODUCT => 'Specific Products',
+    CouponTypeEnum::class => [
+        CouponTypeEnum::TOTAL_ORDER => 'Total Order',
+        CouponTypeEnum::SPECIFIC_PRODUCT => 'Specific Products',
     ]
 ];
