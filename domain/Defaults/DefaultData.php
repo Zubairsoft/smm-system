@@ -13,7 +13,7 @@ class DefaultData
     {
         return [
             [
-             // 'id' => uuid_create(),
+                'id' => uuid_create(),
                 'name_ar' => 'الحميع',
                 'name_en' => 'All',
                 'is_active' => true,
