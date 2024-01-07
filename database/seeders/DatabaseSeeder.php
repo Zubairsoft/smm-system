@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             AdminSeeder::class,
             ShopSeeder::class,
             BankSeeder::class,
+            BankAccountSeeder::class,
             BrandSeeder::class,
             CategorySeeder::class,
         ]);

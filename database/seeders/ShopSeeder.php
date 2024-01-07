@@ -27,6 +27,8 @@ class ShopSeeder extends Seeder
                 'address' => 'المكلا حضرموت',
                 'is_active' => true,
             ]);
+
+            Shop::factory(10)->create();
         });
     }
 }
