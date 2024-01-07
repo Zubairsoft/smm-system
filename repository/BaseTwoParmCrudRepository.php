@@ -82,7 +82,7 @@ abstract class BaseTwoParmCrudRepository
         }
     }
 
-    private function find(string $id): Model
+    protected function find(string $id): Model
     {
         return $this->makeInstanceOfModel()->query()->findOrFail($id);
     }
