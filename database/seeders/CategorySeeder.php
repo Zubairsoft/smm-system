@@ -14,6 +14,6 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        Category::query()->create(DefaultData::categories()[0]);
+        Category::query()->insert(DefaultData::categories());
     }
 }
