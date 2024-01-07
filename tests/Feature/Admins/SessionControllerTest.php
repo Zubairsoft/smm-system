@@ -5,10 +5,13 @@ namespace Tests\Feature\Admins;
 use App\Models\Admin;
 use Domain\Dashboard\Actions\Sessions\LoginAction;
 use Domain\Dashboard\DataTransferToObject\Sessions\LoginData;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class SessionControllerTest extends TestCase
 {
+    use RefreshDatabase;
+    
     private $admin;
 
     private $url;
