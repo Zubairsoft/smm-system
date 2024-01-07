@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cobone_product', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+        Schema::create('coupon_product', function (Blueprint $table) {
+            $table->id('id');
             $table->foreignUuid('product_id')->constrained('products');
-            $table->foreignUuid('cobone_id')->constrained('cobones');
+            $table->foreignUuid('coupon_id')->constrained('coupons');
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cobone_product');
+        Schema::dropIfExists('coupon_product');
     }
 };

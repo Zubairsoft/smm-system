@@ -1,15 +1,15 @@
 <?php
 
-namespace Domain\Shops\DataTransferToObject\Cobones;
+namespace Domain\Shops\DataTransferToObject\Coupons;
 
-use Domain\Shops\Enums\CoboneTypeEnum;
+use Domain\Shops\Enums\CouponTypeEnum;
 use Domain\Supports\Concerns\Requests\HasFailedValidationDtoRequest;
 use Illuminate\Validation\Rule;
 use Spatie\LaravelData\Attributes\MapInputName;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\Optional;
 
-class UpdateCoboneData extends Data
+class UpdateCouponData extends Data
 {
     use HasFailedValidationDtoRequest;
 
@@ -27,7 +27,7 @@ class UpdateCoboneData extends Data
     {
         return [
             'cobone_type' => [
-                Rule::in(CoboneTypeEnum::getValues())
+                Rule::in(CouponTypeEnum::getValues())
             ],
             'start_at' => [
                 'after_or_equal:today',
@@ -43,8 +43,8 @@ class UpdateCoboneData extends Data
                 'total_order' => [
                     'numeric',
                     'min:1',
-                    Rule::requiredIf(request()->cobone_type ? CoboneTypeEnum::fromValue((int)request()->cobone_type)->is(CoboneTypeEnum::TOTAL_ORDER) : false),
-                    Rule::prohibitedIf(request()->cobone_type ? CoboneTypeEnum::fromValue((int)request()->cobone_type)->is(CoboneTypeEnum::SPECIFIC_PRODUCT) : false)
+                    Rule::requiredIf(request()->cobone_type ? CouponTypeEnum::fromValue((int)request()->cobone_type)->is(CouponTypeEnum::TOTAL_ORDER) : false),
+                    Rule::prohibitedIf(request()->cobone_type ? CouponTypeEnum::fromValue((int)request()->cobone_type)->is(CouponTypeEnum::SPECIFIC_PRODUCT) : false)
                 ],
             ],
         ];

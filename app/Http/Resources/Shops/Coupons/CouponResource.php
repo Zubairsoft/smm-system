@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Resources\Shops\Cobones;
+namespace App\Http\Resources\Shops\Coupons;
 
-use Domain\Shops\Enums\CoboneTypeEnum;
+use Domain\Shops\Enums\CouponTypeEnum;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CoboneResource extends JsonResource
+class CouponResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -23,7 +23,7 @@ class CoboneResource extends JsonResource
             'end_at' => $this->end_at,
         ];
 
-        if ($this->type->is(CoboneTypeEnum::TOTAL_ORDER)) {
+        if ($this->type->is(CouponTypeEnum::TOTAL_ORDER)) {
             $resource += ['total_order' => $this->total_order];
         }
         return $resource;

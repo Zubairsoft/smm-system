@@ -54,3 +54,8 @@ function addMultipleMedia($model, string $keyNameFromRequest, string $collection
             $fileAdder->toMediaCollection($collection)
         );
 }
+
+function getMissingKeys(array $allKeys, array $keys): array
+{
+    return array_filter($allKeys, fn ($key) => in_array($key, $keys));
+}

@@ -4,7 +4,7 @@ namespace Domain\Shops\Attributes;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
 
-trait CoboneAttributes
+trait CouponAttributes
 {
     protected function coboneType(): Attribute
     {

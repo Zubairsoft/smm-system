@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cobones', function (Blueprint $table) {
+        Schema::create('coupons', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('shop_id')->constrained('shops')->index();
-            $table->string('token');
+            $table->string('code');
             $table->tinyInteger('type')->index();
             $table->decimal('total_order')->nullable();
             $table->dateTime('start_at');
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cobones');
+        Schema::dropIfExists('coupons');
     }
 };

@@ -1,25 +1,25 @@
 <?php
 
-namespace Domain\Shops\DataTransferToObject\Cobones;
+namespace Domain\Shops\DataTransferToObject\Coupons;
 
-use Domain\Shops\Enums\CoboneTypeEnum;
+use Domain\Shops\Enums\CouponTypeEnum;
 use Domain\Supports\Concerns\Requests\HasFailedValidationDtoRequest;
 use Illuminate\Validation\Rule;
 use Spatie\LaravelData\Attributes\MapInputName;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\Optional;
 
-class StoreCoboneData extends Data
+class StoreCouponData extends Data
 {
     use HasFailedValidationDtoRequest;
 
     public function __construct(
-        public string $token,
         #[MapInputName('cobone_type')]
         public int $type,
         public string $start_at,
         public string $end_at,
-        public Optional|float $total_order
+        public Optional|float $total_order,
+        public Optional|array $product_ids
 
     ) {
     }
@@ -27,14 +27,9 @@ class StoreCoboneData extends Data
     public static function rules(): array
     {
         return [
-            'token' => [
-                'required',
-                'min:10',
-                'max:100',
-            ],
             'cobone_type' => [
                 'required',
-                Rule::in(CoboneTypeEnum::getValues())
+                Rule::in(CouponTypeEnum::getValues())
             ],
             'start_at' => [
                 'required',
@@ -49,8 +44,16 @@ class StoreCoboneData extends Data
             'total_order' => [
                 'numeric',
                 'min:1',
-                Rule::requiredIf(request()->cobone_type ? CoboneTypeEnum::fromValue((int)request()->cobone_type)->is(CoboneTypeEnum::TOTAL_ORDER) : false),
-                Rule::prohibitedIf(request()->cobone_type ? CoboneTypeEnum::fromValue((int)request()->cobone_type)->is(CoboneTypeEnum::SPECIFIC_PRODUCT) : false)
+                Rule::requiredIf(request()->cobone_type ? CouponTypeEnum::fromValue((int)request()->cobone_type)->is(CouponTypeEnum::TOTAL_ORDER) : false),
+                Rule::prohibitedIf(request()->cobone_type ? CouponTypeEnum::fromValue((int)request()->cobone_type)->is(CouponTypeEnum::SPECIFIC_PRODUCT) : false)
+            ],
+            'product_ids' => [
+                'array',
+                Rule::prohibitedIf(request()->cobone_type ? CouponTypeEnum::fromValue((int)request()->cobone_type)->is(CouponTypeEnum::TOTAL_ORDER) : false),
+
+            ],
+            'products_ids.*' => [
+                Rule::exists('products', 'id'),
             ],
         ];
     }
