@@ -182,7 +182,7 @@ trait JsonResponseHandler
      */
     protected function logicalException($e): JsonResponse
     {
-        return sendFailedResponse($e->getMessage(), [$e->getErrorKey() => $e->getMessage()], $e->getCode());
+        return sendFailedResponse($e->getMessage(),$e->getErrorKey()? [$e->getErrorKey() => $e->getMessage()]:null, $e->getCode());
     }
 
     /**
