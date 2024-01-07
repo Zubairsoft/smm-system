@@ -8,7 +8,7 @@ class LogicException extends Exception
 {
     private $errorKey;
 
-    public function __construct($message = 'error', $statusCode = 400, string $errorKey = 'error')
+    public function __construct($message = 'error', $statusCode = 400, string $errorKey = null)
     {
         parent::__construct($message, $statusCode);
 
