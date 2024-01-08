@@ -21,6 +21,8 @@ class DatabaseSeeder extends Seeder
             BankAccountSeeder::class,
             BrandSeeder::class,
             CategorySeeder::class,
+            ProductAttributeSeeder::class,
+            ProductAttributeDetailSeeder::class
         ]);
     }
 }
