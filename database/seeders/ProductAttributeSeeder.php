@@ -2,7 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\ProductAttribute;
+use Domain\Defaults\DefaultData;
 use Illuminate\Database\Seeder;
 
 class ProductAttributeSeeder extends Seeder
@@ -12,6 +13,6 @@ class ProductAttributeSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        ProductAttribute::query()->insert(DefaultData::productAttributes());
     }
 }
