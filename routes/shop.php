@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\v1\Shops\BankAccountController;
 use App\Http\Controllers\Api\v1\Shops\CouponController;
 use App\Http\Controllers\Api\v1\Shops\ProductController;
+use App\Http\Controllers\Api\v1\Shops\ProfileController;
 use App\Http\Controllers\Api\v1\Shops\SessionController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +26,14 @@ Route::name('sessions')
     });
 
 Route::middleware('auth:shop-api')->group(function () {
+
+    Route::prefix('profile')
+        ->controller(ProfileController::class)
+        ->group(function () {
+            Route::get('/', 'show');
+            Route::patch('/', 'update');
+        });
+
     Route::prefix('bank-accounts')
         ->controller(BankAccountController::class)
         ->group(function () {
