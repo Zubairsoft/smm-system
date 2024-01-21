@@ -25,7 +25,6 @@ return new class extends Migration
             $table->decimal('additional_price_for_size')->default(0);
             $table->decimal('additional_price_for_color')->default(0);
             $table->decimal('discount')->default(0);
-            $table->decimal('total_price');
             $table->integer('minimum_quantity');
             $table->boolean('is_active')->default(false);
             $table->boolean('can_refund_money')->default(true);

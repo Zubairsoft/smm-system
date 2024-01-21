@@ -23,7 +23,6 @@ class Product extends BaseModel implements HasMedia
         'price',
         'additional_price_for_size',
         'additional_price_for_color',
-        'total_price',
         'discount',
         'minimum_quantity',
         'is_active',
@@ -45,20 +44,20 @@ class Product extends BaseModel implements HasMedia
         $this->addMediaCollection('product_images');
     }
 
-    public function calculateTotalPrice(): float
-    {
-        return $this->getTotalPriceWithoutDiscount() - $this->getDiscount();
-    }
+    // public function calculateTotalPrice(): float
+    // {
+    //     return $this->getTotalPriceWithoutDiscount() - $this->getDiscount();
+    // }
 
-    private function getDiscount(): int
-    {
-        return $this->getTotalPriceWithoutDiscount() * ($this->discount / 100);
-    }
+    // private function getDiscount(): int
+    // {
+    //     return $this->getTotalPriceWithoutDiscount() * ($this->discount / 100);
+    // }
 
-    private function getTotalPriceWithoutDiscount(): float
-    {
-        return ($this->price + $this->additional_price_for_color + $this->additional_price_for_size);
-    }
+    // private function getTotalPriceWithoutDiscount(): float
+    // {
+    //     return ($this->price + $this->additional_price_for_color + $this->additional_price_for_size);
+    // }
 
     public function shop(): BelongsTo
     {
