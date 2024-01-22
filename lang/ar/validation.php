@@ -202,7 +202,8 @@ return [
         'cobone_type' => 'نوع الكيبون',
         'start_at' => 'تاريخ البداية',
         'end_at' => 'تاريخ الانتهاء',
-        'total_order' => 'اجمالي الطلب'
+        'total_order' => 'اجمالي الطلب',
+        'identifier' => 'المعرف',
     ],
 
     /*
