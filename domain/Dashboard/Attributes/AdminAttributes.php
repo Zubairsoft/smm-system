@@ -2,12 +2,10 @@
 
 namespace Domain\Dashboard\Attributes;
 
-use Illuminate\Database\Eloquent\Casts\Attribute;
+use Domain\Supports\Concerns\Attributes\PasswordAttribute;
 
 trait AdminAttributes
 {
-    protected function password(): Attribute
-    {
-        return new Attribute(set: fn ($value) => bcrypt($value));
-    }
+    use PasswordAttribute;
+
 }

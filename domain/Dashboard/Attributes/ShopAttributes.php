@@ -2,14 +2,12 @@
 
 namespace Domain\Dashboard\Attributes;
 
+use Domain\Supports\Concerns\Attributes\PasswordAttribute;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 
 trait ShopAttributes
 {
-    protected function password(): Attribute
-    {
-        return new Attribute(set: fn ($value) => bcrypt($value));
-    }
+    use PasswordAttribute;
 
     protected function avatar(): Attribute
     {
