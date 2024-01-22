@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
+use Domain\Supports\Concerns\Attributes\PasswordAttribute;
+
 class DeliveryWorker extends BaseModel
 {
+    use PasswordAttribute;
 
     protected $fillable = [
         'name',
@@ -11,11 +14,11 @@ class DeliveryWorker extends BaseModel
         'password'
     ];
 
-    protected $hidden= [
+    protected $hidden = [
         'password',
     ];
 
     protected $casts = [
-        'is_active'=>'boolean'
+        'is_active' => 'boolean'
     ];
 }
