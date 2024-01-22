@@ -32,7 +32,7 @@ class UpdateDeliveryWorkerData extends Data
                 Rule::unique('delivery_workers','identifier')
             ],
             'password' => [
-                'min:9',
+                'min:6',
                 'confirmed'
             ],
             'is_active' => [

@@ -13,7 +13,7 @@ class StoreDeliveryWorkerData extends Data
     public function __construct(
         public string $name,
         public string $identifier,
-        public string $password,
+        public string $password = '0000',
         public bool $is_active = true,
     ) {
     }
@@ -30,11 +30,11 @@ class StoreDeliveryWorkerData extends Data
                 'required',
                 'min:9',
                 'max:255',
-                Rule::unique('delivery_workers','identifier')
+                Rule::unique('delivery_workers', 'identifier')
             ],
             'password' => [
                 'required',
-                'min:9',
+                'min:6',
                 'confirmed'
             ],
             'is_active' => [
