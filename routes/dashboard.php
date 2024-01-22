@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\v1\Dashboard\DeliveryWorkerController;
 use App\Http\Controllers\Api\v1\Dashboard\ProductAttributeController;
 use App\Http\Controllers\Api\v1\Dashboard\ProductAttributeDetailController;
 use App\Http\Controllers\Api\v1\Dashboard\SessionController;
+use App\Http\Controllers\Api\v1\Dashboard\Settings\PromotionalOfferSettingController;
 use App\Http\Controllers\Api\v1\Dashboard\ShopController;
 use App\Http\Controllers\Api\v1\Dashboard\TagController;
 use Illuminate\Support\Facades\Route;
@@ -110,5 +111,16 @@ Route::middleware('auth:admin-api')
                 Route::get('/{id}', 'show');
                 Route::patch('/{id}', 'update');
                 Route::delete('/{id}', 'destroy');
+            });
+
+        Route::name('settings.')
+            ->prefix('settings')
+            ->group(function () {
+                Route::name('promotional-offers')
+                    ->prefix('promotional-offers')
+                    ->controller(PromotionalOfferSettingController::class)->group(function () {
+                        Route::get('/', 'show');
+                        Route::patch('/', 'update');
+                    });
             });
     });
