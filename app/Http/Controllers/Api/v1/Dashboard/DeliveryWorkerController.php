@@ -25,7 +25,7 @@ class DeliveryWorkerController extends Controller
     {
         $deliveryWorker = $this->repository->store($request);
 
-        return sendSuccessResponse(__('messages.create_data'), $deliveryWorker);
+        return sendSuccessResponse(__('messages.create_data'), DeliveryWorkerResource::make($deliveryWorker));
     }
 
     public function show(string $id): JsonResponse
@@ -43,6 +43,6 @@ class DeliveryWorkerController extends Controller
     public function destroy(string $id): JsonResponse
     {
         $this->repository->destroy($id);
-        return sendSuccessResponse(__('messages.get_data'));
+        return sendSuccessResponse(__('messages.delete_data'));
     }
 }
