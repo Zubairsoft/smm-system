@@ -2,9 +2,8 @@
 
 namespace Repository;
 
-use Illuminate\Http\JsonResponse;
+use Domain\Supports\Classes\Settings;
 use Spatie\LaravelData\Data;
-use Spatie\LaravelSettings\Settings;
 
 class SettingRepository
 {
