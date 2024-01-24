@@ -31,7 +31,7 @@ class SessionController extends Controller
     {
         $shop = app(LoginAction::class)($request);
 
-        return sendSuccessResponse(message: __('auth.success_register'), data: $shop);
+        return sendSuccessResponse(message: __('auth.success_login'), data: $shop);
     }
 
     public function resendEmailVerificationCode(ResendEmailVerificationCodeData $request): JsonResponse
