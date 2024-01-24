@@ -204,6 +204,7 @@ return [
         'end_at' => 'تاريخ الانتهاء',
         'total_order' => 'اجمالي الطلب',
         'identifier' => 'المعرف',
+        'promotional_duration' => 'مدةالعرض الترويجي',
     ],
 
     /*
