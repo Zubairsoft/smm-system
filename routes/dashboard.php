@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\v1\Dashboard\CategoryController;
 use App\Http\Controllers\Api\v1\Dashboard\DeliveryWorkerController;
 use App\Http\Controllers\Api\v1\Dashboard\ProductAttributeController;
 use App\Http\Controllers\Api\v1\Dashboard\ProductAttributeDetailController;
+use App\Http\Controllers\Api\v1\Dashboard\PromotionalOfferController;
 use App\Http\Controllers\Api\v1\Dashboard\SessionController;
 use App\Http\Controllers\Api\v1\Dashboard\Settings\PromotionalOfferSettingController;
 use App\Http\Controllers\Api\v1\Dashboard\ShopController;
@@ -106,6 +107,16 @@ Route::middleware('auth:admin-api')
         Route::name('delivery-workers.')
             ->prefix('delivery-workers')
             ->controller(DeliveryWorkerController::class)->group(function () {
+                Route::get('/', 'index');
+                Route::post('/', 'store');
+                Route::get('/{id}', 'show');
+                Route::patch('/{id}', 'update');
+                Route::delete('/{id}', 'destroy');
+            });
+
+        Route::name('promotional-offers')
+            ->prefix('promotional-offers')
+            ->controller(PromotionalOfferController::class)->group(function () {
                 Route::get('/', 'index');
                 Route::post('/', 'store');
                 Route::get('/{id}', 'show');
