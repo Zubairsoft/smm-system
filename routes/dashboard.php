@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\v1\Dashboard\AdvertisementController;
 use App\Http\Controllers\Api\v1\Dashboard\BankAccountController;
 use App\Http\Controllers\Api\v1\Dashboard\BankController;
 use App\Http\Controllers\Api\v1\Dashboard\BrandController;
@@ -117,6 +118,16 @@ Route::middleware('auth:admin-api')
         Route::name('promotional-offers')
             ->prefix('promotional-offers')
             ->controller(PromotionalOfferController::class)->group(function () {
+                Route::get('/', 'index');
+                Route::post('/', 'store');
+                Route::get('/{id}', 'show');
+                Route::patch('/{id}', 'update');
+                Route::delete('/{id}', 'destroy');
+            });
+
+        Route::name('advertisements')
+            ->prefix('advertisements')
+            ->controller(AdvertisementController::class)->group(function () {
                 Route::get('/', 'index');
                 Route::post('/', 'store');
                 Route::get('/{id}', 'show');
