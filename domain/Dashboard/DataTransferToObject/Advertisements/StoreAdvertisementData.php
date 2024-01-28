@@ -2,11 +2,11 @@
 
 namespace Domain\Dashboard\DataTransferToObject\Advertisements;
 
-use DateTime;
 use Domain\Supports\Concerns\Requests\HasFailedValidationDtoRequest;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Validation\Rules\File;
 use Spatie\LaravelData\Data;
+use Spatie\LaravelData\Optional;
 
 class StoreAdvertisementData extends Data
 {
@@ -14,9 +14,9 @@ class StoreAdvertisementData extends Data
 
     public function __construct(
         public string $text,
-        public DateTime $expire_at,
+        public string $expire_at,
         public UploadedFile $image,
-        public bool $is_active
+        public Optional|bool $is_active
     ) {
     }
 
@@ -30,8 +30,8 @@ class StoreAdvertisementData extends Data
             ],
             'expire_at' => [
                 'required',
-                'datetime',
                 'date_format:Y-m-d H:i:s',
+                'after_or_equal:today'
             ],
             'image' => [
                 'required',

@@ -2,7 +2,6 @@
 
 namespace Domain\Dashboard\DataTransferToObject\Advertisements;
 
-use DateTime;
 use Domain\Supports\Concerns\Requests\HasFailedValidationDtoRequest;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Validation\Rules\File;
@@ -15,7 +14,7 @@ class UpdateAdvertisementData extends Data
 
     public function __construct(
         public Optional|string $text,
-        public Optional|DateTime $expire_at,
+        public Optional|string $expire_at,
         public Optional|UploadedFile $image,
         public Optional|bool $is_active
     ) {
@@ -29,8 +28,8 @@ class UpdateAdvertisementData extends Data
                 'min:10',
             ],
             'expire_at' => [
-                'datetime',
                 'date_format:Y-m-d H:i:s',
+                'after_or_equal:today'
             ],
             'image' => [
                 File::types(['png', 'jpg', 'jpeg'])->max(2 * 1024)
