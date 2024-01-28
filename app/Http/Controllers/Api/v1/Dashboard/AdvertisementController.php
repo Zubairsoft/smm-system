@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\v1\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Dashboard\Advertisements\AdvertisementResource;
 use Domain\Dashboard\DataTransferToObject\Advertisements\StoreAdvertisementData;
 use Domain\Dashboard\DataTransferToObject\Advertisements\UpdateAdvertisementData;
 use Illuminate\Http\JsonResponse;
@@ -16,7 +17,7 @@ class AdvertisementController extends Controller
 
     public function index(): JsonResponse
     {
-        return sendSuccessResponse(__('messages.get_data'), $this->repository->index());
+        return sendSuccessResponse(__('messages.get_data'), AdvertisementResource::collection($this->repository->index()));
     }
 
     public function store(StoreAdvertisementData $request): JsonResponse
@@ -25,14 +26,14 @@ class AdvertisementController extends Controller
 
         $this->repository->addMedia($request, $advertisement, 'image', 'image');
 
-        return sendSuccessResponse(__('messages.create_data'), $advertisement);
+        return sendSuccessResponse(__('messages.create_data'), AdvertisementResource::make($advertisement));
     }
 
     public function show(string $id)
     {
         $advertisement = $this->repository->show($id);
 
-        return sendSuccessResponse(__('messages.get_data'), $advertisement);
+        return sendSuccessResponse(__('messages.get_data'), AdvertisementResource::make($advertisement));
     }
 
     public function update(UpdateAdvertisementData $request, string $id): JsonResponse
@@ -41,7 +42,7 @@ class AdvertisementController extends Controller
 
         $this->repository->addMedia($request, $advertisement, 'image', 'image');
 
-        return sendSuccessResponse(__('messages.update_data'), $advertisement);
+        return sendSuccessResponse(__('messages.update_data'), AdvertisementResource::make($advertisement));
     }
 
     public function destroy(string $id)
