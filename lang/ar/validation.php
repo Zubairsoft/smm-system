@@ -205,6 +205,8 @@ return [
         'total_order' => 'اجمالي الطلب',
         'identifier' => 'المعرف',
         'promotional_duration' => 'مدةالعرض الترويجي',
+        'text' => 'النص',
+        'expire_at' => 'تاريخ الانتهاء',
     ],
 
     /*
