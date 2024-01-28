@@ -13,11 +13,12 @@ class Advertisement extends BaseModel implements HasMedia
     protected $fillable = [
         'text',
         'expire_at',
-        'is_active'
+        'is_active',
     ];
 
     protected $casts = [
         'is_active' => 'boolean',
+        'expire_at' => 'datetime:Y-m-d H:i:s',
     ];
 
     public function registerMediaCollections(): void
