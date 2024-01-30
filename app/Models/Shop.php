@@ -50,7 +50,7 @@ class Shop extends BaseModel implements HasMedia
     public function checkProducts(array $products_ids): void
     {
         $products = $this->products()->whereIn('id', $products_ids)->pluck('id')->toArray();
-        
+
         if (count($products) !== count($products_ids)) {
             throw new LogicException(__('exceptions.record_not_found'), 404);
         }
@@ -79,5 +79,10 @@ class Shop extends BaseModel implements HasMedia
     public function Coupons(): HasMany
     {
         return $this->hasMany(Coupon::class);
+    }
+
+    public function wallets(): MorphMany
+    {
+        return $this->morphMany(Wallet::class, 'accountable');
     }
 }
