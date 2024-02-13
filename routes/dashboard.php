@@ -13,6 +13,8 @@ use App\Http\Controllers\Api\v1\Dashboard\SessionController;
 use App\Http\Controllers\Api\v1\Dashboard\Settings\PromotionalOfferSettingController;
 use App\Http\Controllers\Api\v1\Dashboard\ShopController;
 use App\Http\Controllers\Api\v1\Dashboard\TagController;
+use App\Http\Controllers\Api\v1\Dashboard\Wallets\TransactionController;
+use App\Http\Controllers\Api\v1\Dashboard\Wallets\WalletController;
 use Illuminate\Support\Facades\Route;
 
 Route::name('session.')
@@ -133,6 +135,16 @@ Route::middleware('auth:admin-api')
                 Route::get('/{id}', 'show');
                 Route::patch('/{id}', 'update');
                 Route::delete('/{id}', 'destroy');
+            });
+
+        Route::name('wallets')
+            ->prefix('wallets')
+            ->controller(WalletController::class)->group(function () {
+                Route::get('/', 'index');
+                Route::name('transactions')->prefix('{id}/transactions')
+                    ->controller(TransactionController::class)->group(function () {
+                        Route::get('/', 'index');
+                    });
             });
 
         Route::name('settings.')
