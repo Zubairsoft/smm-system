@@ -53,6 +53,7 @@ return [
     'unpublished_event_enrollment' => 'لا يمكنك تقديم طلب إشتراك لفعالية غير منشورة',
     'enrollment_request_already_sent' => 'لقد تم إرسال طلب الإشتراك مسبقاً',
     'enrollment_request_already_accepted' => 'لقد تم قبول طلب الإشتراك مسبقاً',
-    'is_not_active_account'=>'حسابك متوقف يرجى التواصل مع المسسؤل',
-    //'must_implemented_has_media'
+    'is_not_active_account' => 'حسابك متوقف يرجى التواصل مع المسسؤل',
+    'not_enough_balance' => 'ليس لديك رصيد كافي',
+    'not_allowed_sort' => 'هدا الفرز غير مصرح به :attribute',
 ];

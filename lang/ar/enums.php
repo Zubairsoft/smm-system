@@ -2,6 +2,7 @@
 
 use Domain\Shops\Enums\CouponTypeEnum;
 use Domain\Supports\Enums\CurrencyEnum;
+use Domain\Supports\Enums\TransactionTypeEnum;
 
 return [
     CurrencyEnum::class => [
@@ -13,5 +14,10 @@ return [
     CouponTypeEnum::class => [
         CouponTypeEnum::TOTAL_ORDER => 'اخمالي الطلب',
         CouponTypeEnum::SPECIFIC_PRODUCT => 'منتجات محددة',
-    ]
+    ],
+    TransactionTypeEnum::class => [
+        TransactionTypeEnum::DEPOSIT => 'ايداع',
+        TransactionTypeEnum::WITHDRAWAL => 'سحب'
+    ],
+
 ];
