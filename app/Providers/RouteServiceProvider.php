@@ -47,7 +47,7 @@ class RouteServiceProvider extends ServiceProvider
     private function dashboardRouteMap()
     {
         Route::middleware('api')
-            ->name('dashboard')
+            ->name('dashboard.')
             ->prefix('api/v1/dashboard/')
             ->group(base_path('routes/dashboard.php'));
     }
