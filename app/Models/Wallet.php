@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Domain\Supports\Enums\CurrencyEnum;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Wallet extends BaseModel
@@ -20,5 +21,15 @@ class Wallet extends BaseModel
     public function accountable(): MorphTo
     {
         return $this->morphTo();
+    }
+
+    public function from(): HasMany
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
+    public function to(): HasMany
+    {
+        return $this->hasMany(Transaction::class);
     }
 }
