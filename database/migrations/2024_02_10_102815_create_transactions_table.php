@@ -16,11 +16,12 @@ return new class extends Migration
             $table->decimal('amount');
             $table->tinyInteger('currency');
             $table->string('type');
-            $table->foreignUuid('from_id')->constrained('wallets');           
+            $table->foreignUuid('from_id')->constrained('wallets');
             $table->foreignUuid('to_id')->constrained('wallets');
             $table->string('notify');
             $table->text('statement')->nullable();
             $table->timestamps();
+            $table->index('created_at');
         });
     }
 

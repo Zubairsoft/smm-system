@@ -14,10 +14,12 @@ return new class extends Migration
         Schema::create('wallets', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuidMorphs('accountable');
-            $table->decimal('balance');
+            $table->decimal('balance')->index();
             $table->tinyInteger('currency');
 
             $table->timestamps();
+
+            $table->index('created_at');
         });
     }
 
