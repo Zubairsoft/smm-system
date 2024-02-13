@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Exceptions\LogicException;
 use Domain\Dashboard\Attributes\ShopAttributes;
+use Domain\Supports\Concerns\Transactions\HasTransaction;
 use Domain\Supports\Concerns\Verifies\HasActivateAccount;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
@@ -19,6 +20,7 @@ class Shop extends BaseModel implements HasMedia
         HasApiTokens,
         InteractsWithMedia,
         HasActivateAccount,
+        HasTransaction,
         ShopAttributes;
 
     protected $fillable = [
@@ -81,8 +83,5 @@ class Shop extends BaseModel implements HasMedia
         return $this->hasMany(Coupon::class);
     }
 
-    public function wallets(): MorphMany
-    {
-        return $this->morphMany(Wallet::class, 'accountable');
-    }
+
 }
