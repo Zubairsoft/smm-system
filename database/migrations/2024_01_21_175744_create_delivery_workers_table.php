@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('password');
             $table->boolean('is_active')->default(false);
 
-            $table->timestamp('created_at',0)->nullable()->index();
+            $table->timestamp('created_at')->nullable()->index();
 
-            $table->timestamp('updated_at',0)->nullable();
+            $table->timestamp('updated_at')->nullable();
             
         });
     }
