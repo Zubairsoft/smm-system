@@ -16,7 +16,7 @@ class IndexTransactionAction
         $this->fillerDate($transaction, $data->date);
 
 
-        return $transaction->paginate($data->per_page);
+        return $transaction->sort(['created_at', $data->sorts])->paginate($data->per_page);
     }
 
     private function fillerDate(Builder $query, array $data): Builder
