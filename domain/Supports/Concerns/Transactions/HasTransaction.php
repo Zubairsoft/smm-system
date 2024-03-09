@@ -7,6 +7,7 @@ use App\Models\Wallet;
 use Domain\Supports\Enums\CurrencyEnum;
 use Domain\Supports\Enums\TransactionTypeEnum;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Support\Facades\DB;
 
 trait HasTransaction
 {
@@ -20,16 +21,19 @@ trait HasTransaction
     {
         $wallet = $this->wallets()->where('currency', $currency)->firstOfFail();
 
-        $transaction = $wallet->to()->create([
-            'amount' => $amount,
-            'currency' => $currency,
-            'type' => TransactionTypeEnum::DEPOSIT,
-            'from_id' => $from,
-            'statement' => $statement,
-            'notify' => __('messages.transition.notify', ['process', 'ايداع', 'amount' => $amount]),
-        ]);
+        DB::transaction(function () use ($wallet, $currency, $amount, $from, $statement) {
 
-        $wallet->forceUpdate(['balance' => $wallet->balance + $transaction->amount]);
+            $transaction = $wallet->to()->create([
+                'amount' => $amount,
+                'currency' => $currency,
+                'type' => TransactionTypeEnum::DEPOSIT,
+                'from_id' => $from,
+                'statement' => $statement,
+                'notify' => __('messages.transition.notify', ['process', 'ايداع', 'amount' => $amount]),
+            ]);
+
+            $wallet->forceUpdate(['balance' => $wallet->balance + $transaction->amount]);
+        });
     }
 
     public function withdrawal(CurrencyEnum $currency, float $amount, string $to, string $statement = null)
@@ -39,17 +43,19 @@ trait HasTransaction
         if ($this->checkBalance($wallet, $amount)) {
             throw new LogicException(__('exceptions.not_enough_balance'));
         }
+        DB::transaction(function () use ($wallet, $currency, $amount, $to, $statement) {
 
-        $transaction = $wallet->from()->create([
-            'amount' => $amount,
-            'currency' => $currency,
-            'type' => TransactionTypeEnum::WITHDRAWAL,
-            'to_id' => $to,
-            'statement' => $statement,
-            'notify' => __('messages.transition.notify', ['process', 'سحب', 'amount' => $amount]),
-        ]);
+            $transaction = $wallet->from()->create([
+                'amount' => $amount,
+                'currency' => $currency,
+                'type' => TransactionTypeEnum::WITHDRAWAL,
+                'to_id' => $to,
+                'statement' => $statement,
+                'notify' => __('messages.transition.notify', ['process', 'سحب', 'amount' => $amount]),
+            ]);
 
-        $wallet->forceUpdate(['balance' => $wallet->balance - $transaction->amount]);
+            $wallet->forceUpdate(['balance' => $wallet->balance - $transaction->amount]);
+        });
     }
 
     private function checkBalance(Wallet $wallet, float $amount): bool
