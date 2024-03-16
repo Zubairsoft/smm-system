@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Dashboard\DataTransferToObject\Wallets;
+namespace Domain\Supports\DataTransferToObject\Transactions;
 
 use Domain\Supports\Concerns\Requests\HasFailedValidationDtoRequest;
 use Domain\Supports\Enums\SortEnum;
@@ -14,7 +14,7 @@ class IndexTransactionData extends Data
 
     public function __construct(
         public array $sorts = ['created_at' => 'desc'],
-        public Optional|array $date,
+        public Optional|array $date = [],
         public int $page = 1,
         public int $per_page = 10,
     ) {
