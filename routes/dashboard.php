@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\v1\Dashboard\PromotionalOfferController;
 use App\Http\Controllers\Api\v1\Dashboard\SessionController;
 use App\Http\Controllers\Api\v1\Dashboard\Settings\PromotionalOfferSettingController;
 use App\Http\Controllers\Api\v1\Dashboard\ShopController;
+use App\Http\Controllers\Api\v1\Dashboard\SupportTicketController;
 use App\Http\Controllers\Api\v1\Dashboard\TagController;
 use App\Http\Controllers\Api\v1\Dashboard\Wallets\TransactionController;
 use App\Http\Controllers\Api\v1\Dashboard\Wallets\WalletController;
@@ -145,6 +146,15 @@ Route::middleware('auth:admin-api')
                     ->controller(TransactionController::class)->group(function () {
                         Route::get('/', 'index');
                     });
+            });
+
+        Route::name('support-tickets')
+            ->prefix('support-tickets')
+            ->controller(SupportTicketController::class)->group(function () {
+                Route::get('/', 'index');
+                Route::get('/{id}', 'show');
+                Route::patch('/{id}', 'update');
+                Route::delete('/{id}', 'destroy');
             });
 
         Route::name('settings.')

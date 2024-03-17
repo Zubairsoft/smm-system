@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\v1\Shops\SupportTicketController;
 use App\Http\Controllers\Api\v1\Shops\BankAccountController;
 use App\Http\Controllers\Api\v1\Shops\CouponController;
 use App\Http\Controllers\Api\v1\Shops\ProductController;
@@ -63,5 +64,11 @@ Route::middleware('auth:shop-api')->group(function () {
             Route::get('/{id}', 'show');
             Route::patch('/{id}', 'update');
             Route::delete('/{id}', 'destroy');
+        });
+
+    Route::prefix('support-tickets')
+        ->controller(SupportTicketController::class)
+        ->group(function () {
+            Route::post('/', 'store');
         });
 });
