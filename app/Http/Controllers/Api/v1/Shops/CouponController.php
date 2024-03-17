@@ -16,30 +16,30 @@ class CouponController extends Controller
 
     public function index()
     {
-        $cobones = $this->repository->index(currentUser(config('auth.shop-api-guard'))->id);
+        $coupons = $this->repository->index(currentUser(config('auth.shop-api-guard'))->id);
 
-        return sendSuccessResponse(__('messages.get_data'), CouponResource::collection($cobones));
+        return sendSuccessResponse(__('messages.get_data'), CouponResource::collection($coupons));
     }
 
     public function store(StoreCouponData $request)
     {
-        $cobone = $this->repository->store($request, currentUser(config('auth.shop-api-guard'))->id);
+        $coupon = $this->repository->store($request, currentUser(config('auth.shop-api-guard'))->id);
 
-        return sendSuccessResponse(__('messages.create_data'), CouponResource::make($cobone));
+        return sendSuccessResponse(__('messages.create_data'), CouponResource::make($coupon));
     }
 
     public function show(string $id)
     {
-        $cobone = $this->repository->show(currentUser(config('auth.shop-api-guard'))->id, $id);
+        $coupon = $this->repository->show(currentUser(config('auth.shop-api-guard'))->id, $id);
 
-        return sendSuccessResponse(__('messages.get_data'), CouponResource::make($cobone));
+        return sendSuccessResponse(__('messages.get_data'), CouponResource::make($coupon));
     }
 
     public function update(UpdateCouponData $request, string $id)
     {
-        $cobone = $this->repository->update($request, currentUser(config('auth.shop-api-guard'))->id, $id);
+        $coupon = $this->repository->update($request, currentUser(config('auth.shop-api-guard'))->id, $id);
 
-        return sendSuccessResponse(__('messages.update_data'), CouponResource::make($cobone));
+        return sendSuccessResponse(__('messages.update_data'), CouponResource::make($coupon));
     }
 
     public function destroy(string $id)
