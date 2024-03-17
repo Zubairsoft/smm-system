@@ -207,6 +207,7 @@ return [
         'promotional_duration' => 'مدةالعرض الترويجي',
         'text' => 'النص',
         'expire_at' => 'تاريخ الانتهاء',
+        'subject' => 'الموضوع',
     ],
 
     /*
