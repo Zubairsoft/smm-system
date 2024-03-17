@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignUuid('shop_id')->constrained('shops');
             $table->string('title');
             $table->text('subject');
-            $table->string('reply');
+            $table->string('reply')->nullable();
             $table->tinyInteger('status')->default(SupportTicketEnum::UNDER_REVIEW);
             $table->timestamps();
         });
