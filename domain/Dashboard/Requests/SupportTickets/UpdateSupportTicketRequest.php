@@ -15,7 +15,7 @@ class UpdateSupportTicketRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -35,6 +35,14 @@ class UpdateSupportTicketRequest extends FormRequest
                 Rule::in(SupportTicketEnum::getKeys())
             ]
         ];
+    }
+
+    protected function passedValidation(): void
+    {
+        $this->replace([
+            'reply' => $this->reply,
+            'status' => SupportTicketEnum::getValue($this->status),
+        ]);
     }
 
     protected function failedValidation(Validator $validator): void
