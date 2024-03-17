@@ -22,6 +22,6 @@ class SupportTicketController extends Controller
 
         $this->repository->addMedia($request, $supportTicket, 'attachment', 'attachment');
 
-        return sendSuccessResponse(__('messages.create_data'), $supportTicket);
+        return sendSuccessResponse(__('messages.create_data'));
     }
 }
