@@ -78,10 +78,13 @@ class Shop extends BaseModel implements HasMedia
         return $this->hasMany(Product::class);
     }
 
-    public function Coupons(): HasMany
+    public function coupons(): HasMany
     {
         return $this->hasMany(Coupon::class);
     }
 
-
+    public function supportTickets(): HasMany
+    {
+        return $this->hasMany(SupportTicket::class);
+    }
 }
