@@ -1,6 +1,8 @@
 <?php
 
 use Domain\Shops\Enums\CouponTypeEnum;
+use Domain\Shops\Enums\ProductInquireStatusEnum;
+use Domain\Shops\Enums\SupportTicketEnum;
 use Domain\Supports\Enums\CurrencyEnum;
 use Domain\Supports\Enums\TransactionTypeEnum;
 
@@ -19,5 +21,12 @@ return [
         TransactionTypeEnum::DEPOSIT => 'ايداع',
         TransactionTypeEnum::WITHDRAWAL => 'سحب'
     ],
-
+    SupportTicketEnum::class => [
+        SupportTicketEnum::UNDER_REVIEW => 'قيد المراجعه',
+        SupportTicketEnum::SOLVED => 'تم الحل'
+    ],
+    ProductInquireStatusEnum::class => [
+        ProductInquireStatusEnum::PENDING => 'قيد الانتظار',
+        ProductInquireStatusEnum::REPLIED => 'تم الرد'
+    ],
 ];
