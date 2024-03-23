@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api\v1\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Dashboard\Shops\ShopResource;
-use App\Models\Shop;
 use Domain\Dashboard\DataTransferToObject\Shops\StoreShopData;
 use Domain\Dashboard\DataTransferToObject\Shops\UpdateShopData;
 use Illuminate\Http\JsonResponse;
