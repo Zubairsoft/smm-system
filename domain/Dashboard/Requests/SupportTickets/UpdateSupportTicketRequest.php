@@ -3,6 +3,7 @@
 namespace Domain\Dashboard\Requests\SupportTickets;
 
 use Domain\Shops\Enums\SupportTicketEnum;
+use Domain\Supports\Concerns\Requests\HasFailedValidationRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -10,6 +11,7 @@ use Illuminate\Validation\Rule;
 
 class UpdateSupportTicketRequest extends FormRequest
 {
+    use HasFailedValidationRequest;
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -43,18 +45,5 @@ class UpdateSupportTicketRequest extends FormRequest
             'reply' => $this->reply,
             'status' => SupportTicketEnum::getValue($this->status),
         ]);
-    }
-
-    protected function failedValidation(Validator $validator): void
-    {
-        if ($validator->fails()) {
-            throw new HttpResponseException(
-                sendFailedResponse(
-                    __('messages.validation_error'),
-                    $validator->errors()->first(),
-                    422
-                )
-            );
-        }
     }
 }
