@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\v1\Shops\SupportTicketController;
 use App\Http\Controllers\Api\v1\Shops\BankAccountController;
 use App\Http\Controllers\Api\v1\Shops\CouponController;
 use App\Http\Controllers\Api\v1\Shops\ProductController;
+use App\Http\Controllers\Api\v1\Shops\ProductInquireController;
 use App\Http\Controllers\Api\v1\Shops\ProfileController;
 use App\Http\Controllers\Api\v1\Shops\SessionController;
 use Illuminate\Support\Facades\Route;
@@ -70,5 +71,13 @@ Route::middleware('auth:shop-api')->group(function () {
         ->controller(SupportTicketController::class)
         ->group(function () {
             Route::post('/', 'store');
+        });
+
+    Route::prefix('product-inquires')
+        ->controller(ProductInquireController::class)
+        ->group(function () {
+            Route::get('/', 'index');
+            Route::get('/{id}', 'show');
+            Route::patch('/{id}', 'update');
         });
 });
