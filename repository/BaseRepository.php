@@ -2,12 +2,15 @@
 
 namespace Repository;
 
+use App\Exceptions\LogicException;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\LaravelData\Data;
 
 abstract class BaseRepository
 {
     protected  $model;
+
+    protected bool $protectedFromDelete = false;
 
     abstract protected function setData();
 
@@ -55,6 +58,8 @@ abstract class BaseRepository
 
     public function destroy(string $id): void
     {
+        $this->checkIfProtectedFromDelete();
+
         $model = $this->find($id);
 
         $model->delete();
@@ -72,5 +77,10 @@ abstract class BaseRepository
     private function find(string $id): Model
     {
         return $this->makeInstanceOfModel()->query()->findOrFail($id);
+    }
+
+    private function checkIfProtectedFromDelete(): void
+    {
+        throw_if($this->protectedFromDelete, new LogicException(__('exceptions.can_not_delete'), 403));
     }
 }
