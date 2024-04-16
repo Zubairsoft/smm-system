@@ -2,6 +2,7 @@
 
 namespace Domain\Shops\DataTransferToObject\Products;
 
+use Domain\Shops\Enums\DiscountTypeEnum;
 use Domain\Supports\Concerns\Requests\HasFailedValidationDtoRequest;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Validation\Rule;
@@ -16,17 +17,13 @@ class UpdateProductData extends Data
     public function __construct(
         public Optional|string $name,
         public Optional|string $description,
-        public Optional|string $colors,
         public Optional|float $quantity,
         public Optional|int $minimum_quantity,
-        public Optional|float $additional_price_for_size,
-        public Optional|float $additional_price_for_color,
         public Optional|float $discount,
         public Optional|float $price,
         public Optional|array $tags,
         public Optional|string $category_id,
         public Optional|string $brand_id,
-        public Optional|string $product_attribute_detail_id,
         public Optional|bool $can_refund_money,
         public Optional|bool $can_show_quantity,
         public Optional|bool $is_active,
@@ -45,28 +42,28 @@ class UpdateProductData extends Data
             'description' => [
                 'string',
             ],
-            'colors' => [
-                'string',
-                'max:255,'
-            ],
             'quantity' => [
                 'numeric',
             ],
             'minimum_quantity' => [
                 'integer',
             ],
-            'additional_price_for_size' => [
-                'numeric',
-                'min:0',
+            'discount_type' => [
+                'required',
+                Rule::in(DiscountTypeEnum::getValues())
             ],
-            'additional_price_for_color' => [
-                'numeric',
+            'discount_percentage' => [
+                'integer',
                 'min:0',
+                'max:100',
+                Rule::requiredIf(request()->discount_type === DiscountTypeEnum::PERCENTAGE),
+                Rule::prohibitedIf(request()->discount_type !== DiscountTypeEnum::PERCENTAGE),
             ],
             'discount' => [
                 'numeric',
                 'min:0',
-                'max:100',
+                Rule::requiredIf(request()->discount_type === DiscountTypeEnum::PRICE),
+                Rule::prohibitedIf(request()->discount_type !== DiscountTypeEnum::PRICE),
             ],
             'tags' => [
                 'array'
@@ -79,9 +76,6 @@ class UpdateProductData extends Data
             ],
             'brand_id' => [
                 Rule::exists('brands', 'id'),
-            ],
-            'product_attribute_detail_id' => [
-                Rule::exists('product_attribute_details', 'id'),
             ],
             'can_refund_money' => [
                 'boolean'
