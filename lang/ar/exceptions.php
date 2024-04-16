@@ -56,4 +56,5 @@ return [
     'is_not_active_account' => 'حسابك متوقف يرجى التواصل مع المسسؤل',
     'not_enough_balance' => 'ليس لديك رصيد كافي',
     'not_allowed_sort' => 'هدا الفرز غير مصرح به :attribute',
+    'can_not_delete' => 'هدا الحقل محمي',
 ];

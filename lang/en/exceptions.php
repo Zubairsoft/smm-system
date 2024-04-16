@@ -57,4 +57,5 @@ return [
     'is_not_active_account' => 'Your account is inactivated please contact with administrator',
     'not_enough_balance' => 'you don\'t have enough balance',
     'not_allowed_sort' => 'this :attribute not allowed to sort',
+    'can_not_delete' => 'is protect field',
 ];
