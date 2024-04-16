@@ -21,6 +21,12 @@ final class StoreProductAction
 
             $product->tags()->sync($data->tag_ids);
         }
+        $i = 0;
+        foreach ($data->product_items as $productItem) {
+            $item = $product->productItems()->create($productItem);
+            $item->productColorItems()->createMany($data->product_color_items[$i]);
+            $i++;
+        }
 
         return $product->refresh();
     }
