@@ -22,4 +22,34 @@ class DefaultData
             ]
         ];
     }
+
+    public static function colors()
+    {
+        return [
+            [
+                'id' => uuid_create(),
+                'name_ar' => 'اخمر',
+                'name_en' => 'red',
+                'is_active' => true,
+            ],
+            [
+                'id' => uuid_create(),
+                'name_ar' => 'اصفر',
+                'name_en' => 'yalow',
+                'is_active' => true,
+            ],
+            [
+                'id' => uuid_create(),
+                'name_ar' => 'اسود',
+                'name_en' => 'black',
+                'is_active' => true,
+            ],
+            [
+                'id' => uuid_create(),
+                'name_ar' => 'ابيض',
+                'name_en' => 'whait',
+                'is_active' => true,
+            ],
+        ];
+    }
 }
