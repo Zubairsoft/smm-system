@@ -5,12 +5,14 @@ namespace App\Models;
 use Domain\Shops\Attributes\ProductAttributes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Product extends BaseModel implements HasMedia
 {
-    use InteractsWithMedia, ProductAttributes;
+    use InteractsWithMedia, ProductAttributes, SoftDeletes;
 
     protected $fillable = [
         'name',
@@ -18,16 +20,15 @@ class Product extends BaseModel implements HasMedia
         'product_attribute_detail_id',
         'category_id',
         'brand_id',
-        'colors',
         'quantity',
         'price',
-        'additional_price_for_size',
-        'additional_price_for_color',
         'discount',
         'minimum_quantity',
         'is_active',
         'can_refund_money',
         'can_show_quantity',
+        'discount_type',
+        'discount_percentage',
     ];
 
     protected $casts = [
@@ -87,5 +88,11 @@ class Product extends BaseModel implements HasMedia
     public function coupons(): BelongsToMany
     {
         return $this->belongsToMany(Coupon::class)->withTimestamps();
+    }
+
+
+    public function productItems(): HasMany
+    {
+        return $this->hasMany(ProductItem::class);
     }
 }
