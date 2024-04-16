@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\v1\Dashboard\BankAccountController;
 use App\Http\Controllers\Api\v1\Dashboard\BankController;
 use App\Http\Controllers\Api\v1\Dashboard\BrandController;
 use App\Http\Controllers\Api\v1\Dashboard\CategoryController;
+use App\Http\Controllers\Api\v1\Dashboard\ColorController;
 use App\Http\Controllers\Api\v1\Dashboard\DeliveryWorkerController;
 use App\Http\Controllers\Api\v1\Dashboard\ProductAttributeController;
 use App\Http\Controllers\Api\v1\Dashboard\ProductAttributeDetailController;
@@ -155,6 +156,15 @@ Route::middleware('auth:admin-api')
                 Route::get('/{id}', 'show');
                 Route::patch('/{id}', 'update');
                 Route::delete('/{id}', 'destroy');
+            });
+
+        Route::name('colors.')
+            ->prefix('colors')
+            ->controller(ColorController::class)->group(function () {
+                Route::get('/', 'index');
+                Route::post('/', 'store');
+                Route::get('/{id}', 'show');
+                Route::patch('/{id}', 'update');
             });
 
         Route::name('settings.')

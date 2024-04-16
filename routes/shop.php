@@ -3,8 +3,10 @@
 use App\Http\Controllers\Api\v1\Shops\SupportTicketController;
 use App\Http\Controllers\Api\v1\Shops\BankAccountController;
 use App\Http\Controllers\Api\v1\Shops\CouponController;
+use App\Http\Controllers\Api\v1\Shops\ProductColorItemController;
 use App\Http\Controllers\Api\v1\Shops\ProductController;
 use App\Http\Controllers\Api\v1\Shops\ProductInquireController;
+use App\Http\Controllers\Api\v1\Shops\ProductItemController;
 use App\Http\Controllers\Api\v1\Shops\ProfileController;
 use App\Http\Controllers\Api\v1\Shops\SessionController;
 use Illuminate\Support\Facades\Route;
@@ -54,6 +56,25 @@ Route::middleware('auth:shop-api')->group(function () {
             Route::get('/{id}', 'show');
             Route::patch('/{id}', 'update');
             Route::delete('/{id}', 'destroy');
+            Route::prefix('{id}/items')
+                ->controller(ProductItemController::class)
+                ->group(function () {
+                    Route::get('/', 'index');
+                    Route::post('/', 'store');
+                    Route::get('/{productItemId}', 'show');
+                    Route::patch('/{productItemId}', 'update');
+                    Route::delete('/{productItemId}', 'destroy');
+
+                    Route::prefix('{productItemId}/colors')
+                        ->controller(ProductColorItemController::class)
+                        ->group(function () {
+                            Route::get('/', 'index');
+                            Route::post('/', 'store');
+                            Route::get('/{productColorItemId}', 'show');
+                            Route::patch('/{productColorItemId}', 'update');
+                            Route::delete('/{productColorItemId}', 'destroy');
+                        });
+                });
         });
 
 
