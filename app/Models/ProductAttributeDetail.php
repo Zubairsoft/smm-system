@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Domain\Supports\Scopes\ActiveScopeTrait;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ProductAttributeDetail extends BaseModel
 {
@@ -23,5 +24,15 @@ class ProductAttributeDetail extends BaseModel
     public function productAttribute(): BelongsTo
     {
         return $this->belongsTo(ProductAttribute::class);
+    }
+
+    public function productColorItems(): HasMany
+    {
+        return $this->hasMany(ProductColorItem::class);
+    }
+
+    public function productItems(): HasMany
+    {
+        return $this->hasMany(ProductItem::class);
     }
 }
