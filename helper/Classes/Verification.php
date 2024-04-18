@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Notification;
 class Verification
 {
     public static function sendVerificationEmailCode(Model $model, string $email, string $key = 'email_verified_at', Notification $notification = null): Model
-    {
+    {        //TODO send email
+
         throw_if(!is_null($model->{$key}), new LogicException(__('auth.already_verified'), 401, 'email'));
 
         $model->sendEmailVerificationCode($email);
@@ -19,7 +20,7 @@ class Verification
 
     public static function sendVerificationPhoneCode(Model $model, string $phone, string $key = 'phone_verified_at', Notification $notification = null): Model
     {
-
+        //TODO send phone code
         throw_if(!is_null($model->{$key}), new LogicException(__('auth.already_verified'), 401, 'email'));
 
         $model->sendPhoneVerificationCode($phone);

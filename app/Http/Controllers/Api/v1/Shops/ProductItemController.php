@@ -21,6 +21,8 @@ class ProductItemController extends Controller
 
     public function store(StoreProductItemData $request, string $id): JsonResponse
     {
+        //TODO handle product when create item
+
         $productItem = $this->repository->store($request, $id);
 
         return sendSuccessResponse(__('messages.create_data'), $productItem);
@@ -33,6 +35,8 @@ class ProductItemController extends Controller
 
     public function update(UpdateProductItemData $request, string $id, string $productItemId): JsonResponse
     {
+        //TODO handle product when update item
+
         $productItem = $this->repository->update($request, $id, $productItemId);
 
         return sendSuccessResponse(__('messages.update_data'), $productItem);
@@ -40,6 +44,7 @@ class ProductItemController extends Controller
 
     public function destroy(string $id, string $productItemId): JsonResponse
     {
+        //TODO handle product when destroy item
         $this->repository->destroy($id, $productItemId);
 
         return sendSuccessResponse(__('messages.delete_data'));

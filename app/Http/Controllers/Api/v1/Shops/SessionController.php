@@ -43,6 +43,8 @@ class SessionController extends Controller
 
     public function activateEmail(ActivateEmailData $request): JsonResponse
     {
+        // TODO add queue for send mail
+
         $email = app(ActivateEmailAction::class)($request);
 
         return sendSuccessResponse(__('auth.email_verified'), $email);
@@ -50,6 +52,7 @@ class SessionController extends Controller
 
     public function resendPhoneVerificationCode(ResendPhoneVerificationCodeData $request): JsonResponse
     {
+        // TODO add queue for send phone
         $phone = app(ResendPhoneVerificationCodeAction::class)($request);
 
         return sendSuccessResponse(__('auth.send_phone_verification_code'), $phone);
