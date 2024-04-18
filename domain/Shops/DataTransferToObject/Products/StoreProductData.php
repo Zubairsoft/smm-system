@@ -2,6 +2,7 @@
 
 namespace Domain\Shops\DataTransferToObject\Products;
 
+use App\Exceptions\LogicException;
 use Domain\Shops\DataTransferToObject\ProductItems\StoreProductItemData;
 use Domain\Shops\DataTransferToObject\ProductColorItems\StoreProductColorItemData;
 use Domain\Shops\Enums\DiscountTypeEnum;
@@ -161,5 +162,22 @@ class StoreProductData extends Data
     public function getQuantityAttribute(): array
     {
         return ['quantity' => $this->calculateQuantity()];
+    }
+
+    public function checkQuantity()
+    {
+        $index = 0;
+        foreach ($this->product_items as $item) {
+            foreach ($this->product_color_items[$index] as $productColorItem) {
+                $colorQuantity = 0;
+                foreach ($productColorItem as $color) {
+                    $colorQuantity += $color->quantity;
+                }
+
+                throw_if($colorQuantity !== $item->quantity, new LogicException('quantity not equal'));
+            }
+
+            $index++;
+        }
     }
 }

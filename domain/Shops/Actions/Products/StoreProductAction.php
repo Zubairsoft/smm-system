@@ -9,9 +9,13 @@ final class StoreProductAction
 {
     public function __invoke(StoreProductData $data): Product
     {
+        $data->checkQuantity();
+
         $shop = currentUser(config('auth.shop-api-guard'));
 
-        $product = $shop->products()->create($data->toArray());
+        $attributes = $data->toArray() + $data->getQuantityAttribute();
+
+        $product = $shop->products()->create($attributes);
 
         $product->addMedia($data->image)->toMediaCollection('image');
 
