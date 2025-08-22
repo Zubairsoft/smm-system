@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
             ProductAttributeSeeder::class,
             ProductAttributeDetailSeeder::class,
             DeliveryWorkerSeeder::class,
-            WalletSeeder::class
+            // WalletSeeder::class
         ]);
     }
 }

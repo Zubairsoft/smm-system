@@ -15,6 +15,7 @@ class SetLocalization
      */
     public function handle(Request $request, Closure $next): Response
     {
+        //TODO : use cache
         if ($request->has('locale')) {
             app()->setLocale($request->locale);
         }

@@ -41,7 +41,7 @@ trait HasActivateAccount
 
     public function IsEmailVerificationCodeIsExpire(): bool
     {
-        return Carbon::parse($this->verifyEmail->created_ar)->addHours(24)->isPast();
+        return Carbon::parse($this->verifyEmail->created_ar)->addHours(24)->isPast(); // TODO should make this 24 in settings table
     }
 
     public function IsPhoneVerificationCodeIsExpire(): bool

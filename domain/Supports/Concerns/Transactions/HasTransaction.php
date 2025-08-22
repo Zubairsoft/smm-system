@@ -17,10 +17,11 @@ trait HasTransaction
         return $this->morphMany(Wallet::class, 'accountable');
     }
 
-    public function deposit(CurrencyEnum $currency, float $amount, string $from, string $statement = null)
+    public function deposit(CurrencyEnum $currency, float $amount, string $from, ?string $statement = null)
     {
-        $wallet = $this->wallets()->where('currency', $currency)->firstOfFail();
+        $wallet = $this->wallets()->where('currency', $currency)->firstOfFail(); // TODO make supoort multi courrancy
 
+        //TODO use DB::beginTransaction
         DB::transaction(function () use ($wallet, $currency, $amount, $from, $statement) {
 
             $transaction = $wallet->to()->create([
@@ -36,13 +37,14 @@ trait HasTransaction
         });
     }
 
-    public function withdrawal(CurrencyEnum $currency, float $amount, string $to, string $statement = null)
+    public function withdrawal(CurrencyEnum $currency, float $amount, string $to, ?string $statement = null)
     {
         $wallet = $this->wallets()->where('currency', $currency)->firstOfFail();
 
         if ($this->checkBalance($wallet, $amount)) {
-            throw new LogicException(__('exceptions.not_enough_balance'));
+            throw new LogicException(__('exceptions.not_enough_balance'),403);
         }
+
         DB::transaction(function () use ($wallet, $currency, $amount, $to, $statement) {
 
             $transaction = $wallet->from()->create([

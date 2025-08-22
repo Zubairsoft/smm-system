@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Wallet extends BaseModel
 {
+    //TODO check wallet process
 
     protected $fillable = [
         'balance',

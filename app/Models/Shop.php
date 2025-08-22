@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Exceptions\LogicException;
+use Domain\Dashboard\Actions\NotificationTemplates\ActivateScope;
 use Domain\Dashboard\Attributes\ShopAttributes;
 use Domain\Supports\Concerns\Transactions\HasTransaction;
 use Domain\Supports\Concerns\Verifies\HasActivateAccount;
@@ -21,6 +22,7 @@ class Shop extends BaseModel implements HasMedia
         InteractsWithMedia,
         HasActivateAccount,
         HasTransaction,
+        ActivateScope,
         ShopAttributes;
 
     protected $fillable = [
@@ -51,9 +53,9 @@ class Shop extends BaseModel implements HasMedia
 
     public function checkProducts(array $products_ids): void
     {
-        $products = $this->products()->whereIn('id', $products_ids)->pluck('id')->toArray();
+        $products = $this->products()->whereIn('id', $products_ids)->count();
 
-        if (count($products) !== count($products_ids)) {
+        if ($products !== count($products_ids)) {
             throw new LogicException(__('exceptions.record_not_found'), 404);
         }
     }
