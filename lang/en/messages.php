@@ -9,6 +9,4 @@ return [
     'transition' => [
         'notify' => ':process from your account :amount'
     ]
-
-
 ];

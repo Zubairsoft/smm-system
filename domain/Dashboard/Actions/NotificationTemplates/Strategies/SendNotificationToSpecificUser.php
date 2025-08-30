@@ -4,6 +4,7 @@ namespace Domain\Dashboard\Actions\NotificationTemplates\Strategies;
 
 use App\Models\NotificationTemplate;
 use App\Models\User;
+use Domain\Dashboard\Notifications\SendCustomNotification;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Notification as FacadesNotification;
 
@@ -18,6 +19,6 @@ final class SendNotificationToSpecificUser implements SendNotification
 
     public function send(NotificationTemplate $notificationTemplate): void
     {
-        FacadesNotification::send($this->users, new SendNotification($notificationTemplate));
+        FacadesNotification::send($this->users, new SendCustomNotification($notificationTemplate));
     }
 }

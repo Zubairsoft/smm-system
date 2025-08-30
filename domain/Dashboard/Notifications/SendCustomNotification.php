@@ -2,20 +2,21 @@
 
 namespace Domain\Dashboard\Notifications;
 
+use App\Models\NotificationTemplate;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Notification;
 
-class SendNotification extends Notification implements ShouldQueue
+class SendCustomNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct()
+    public function __construct(private NotificationTemplate $notificationTemplate)
     {
-        $this->onQueue('notifications');// TODO make notification queue in enum
+        $this->onQueue('notifications'); // TODO make notification queue in enum
     }
 
     /**
@@ -36,10 +37,10 @@ class SendNotification extends Notification implements ShouldQueue
     public function toArray(object $notifiable): array
     {
         return [
-            'title_ar' => $notifiable->title_ar,
-            'title_en' => $notifiable->title_en,
-            'content_ar' => $notifiable->content_ar,
-            'content_en' => $notifiable->content_en
+            'title_ar' => $this->notificationTemplate->title_ar,
+            'title_en' => $this->notificationTemplate->title_en,
+            'content_ar' => $this->notificationTemplate->content_ar,
+            'content_en' => $this->notificationTemplate->content_en
         ];
     }
 }
