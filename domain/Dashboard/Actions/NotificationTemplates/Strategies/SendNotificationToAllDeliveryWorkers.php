@@ -13,7 +13,7 @@ final class SendNotificationToAllDeliveryWorkers implements SendNotification
 
     public function send(NotificationTemplate $notificationTemplate): void
     {
-        DeliveryWorker::active()->chunk(100, function ($users) use ($notificationTemplate) {
+        DeliveryWorker::active()->chunk(1000, function ($users) use ($notificationTemplate) {
             Notification::send($users, new SendCustomNotification($notificationTemplate));
         });
     }

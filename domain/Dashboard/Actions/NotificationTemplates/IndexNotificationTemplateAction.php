@@ -19,6 +19,6 @@ class IndexNotificationTemplateAction
             ->when(
                 request()->search_text,
                 fn($query) => $query->whereAny(['name_ar', 'name_en', 'content_ar', 'content_en'], $data->search_text)
-            )->paginate(request()->per_page ?? 10);
+            )->paginate(request()->get('per_page',10));
     }
 }

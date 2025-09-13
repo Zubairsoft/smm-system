@@ -12,7 +12,7 @@ final class SendNotificationToAllShops implements SendNotification
 {
     public function send(NotificationTemplate $notificationTemplate): void
     {
-        Shop::active()->chunk(100, function ($shops) use ($notificationTemplate) {
+        Shop::active()->chunk(1000, function ($shops) use ($notificationTemplate) {
             Notification::send($shops, new SendCustomNotification($notificationTemplate));
         });
     }
